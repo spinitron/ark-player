@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <title>Ark Player widget demo</title>
 
+    <style>
+body {
+    color: #2d2d2d;
+    font: 1.1rem/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto, Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
+    max-width: 60em;
+    margin: 1em auto 4em;
+}
+h1,h2,h3 { margin: 2em 0 0; }
+h4,h5,h6 { font-size: 100%; }
+h5, h6 { text-transform: uppercase; }
+header h1 { border-bottom: 1px solid; }
+p { margin: 1em 0; }
+a,a:visited { color: blue; }
+code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-weight: bold; }
+code > pre { padding: 0; margin: 0 2em; font-weight: normal; }
+ul, ol { margin: 1em 0; padding: 0 0 0 4em; }
+.ark-play-button img { display: inline; }
+
+</style>
+
     <script src="static/lib/Spinitron.arkPlayer.js"></script>
     <link rel="stylesheet" href="static/lib/arkPlayer.css">
 </head>
@@ -11,39 +31,10 @@
 
 <h1>Ark Player widget</h1>
 
-<p>The Ark Player widget has a number of parts that you should integrate into your web pages separately.</p>
-
-<ol>
-    <li><p>Links to the Ark Player's JavaScript and CSS assets</p></li>
-    <li><p>The Ark Player markup</p></li>
-    <li><p>Optional start links/buttons</p></li>
-    <li><p>JavaScript that initializes the player</p></li>
-</ol>
-
-<h2>1. Asset links</h2>
-
-<p>The Ark Player requires a JavaScript file and a CSS file. Link them in your page
-    head. On this page, for example, the asset links are</p>
-
-<code><pre>
-    &lt;script src="static/lib/Spinitron.arkPlayer.js"&gt;&lt;/script&gt;
-    &lt;link rel="stylesheet" href="static/lib/arkPlayer.css"&gt;
-</pre></code>
-
-<p>Your links will probably be different. Use URLs that point to your copies of
-    the <code>.js</code> and <code>.css</code> asset files.</p>
-
-<h2>2. Ark Player markup</h2>
-
-<p>The markup is a chunk of HTML for the Ark Player's user interface. Copy-paste it from the source of
-    this page.</p>
-
-<p>There's one change you need to make to the markup depending on your needs. The opening <code>&lt;div&gt;</code>
-can have an optional <code>data-ark-start</code> attribute with a value that controls the initial value of
-the player's starting date and time. For example, if the opening tag has a  like the one below</p>
-
-<pre><code>&lt;div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z"&gt;</code></pre>
-
+<p>This page is a demo of the Spinitron Ark Player widget. Source code for the widget and for
+    this web page is in the <a href="https://github.com/spinitron/ark-player">spinitron/ark-player</a>
+    Github repo.
+</p>
 
 <!-- MARKUP - the Ark Player widget markup. Copy-paste this to END OF MARKUP -->
 <div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z">
@@ -63,7 +54,7 @@ the player's starting date and time. For example, if the opening tag has a  like
     <div class="ark-player__volume-control">
         <button class="ark-player__mute-button" aria-label="Mute (m)" title="Mute (m)">
             <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                     <path class="ark-player__volume-speaker" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"></path>
+                <path class="ark-player__volume-speaker" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"></path>
                 <path class="ark-player__volume-slash" d="M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z" style="display: none;"></path>
             </svg>
         </button>
@@ -71,10 +62,7 @@ the player's starting date and time. For example, if the opening tag has a  like
     </div>
 
     <div class="ark-player__picker">
-        <div class="ark-player__date">
-            <select name="date" class="select-css"></select>
-        </div>
-
+        <div class="ark-player__date"><select name="date" class="select-css"></select></div>
         <div class="ark-player__time">
             <select name="hours" class="select-css"></select>
             <select name="minutes" class="select-css"></select>
@@ -82,16 +70,53 @@ the player's starting date and time. For example, if the opening tag has a  like
     </div>
 
     <div class="ark-player__status ark-player_hide">
-        <div class="ark-player__date">
-            --/--/--
-        </div>
-
-        <div class="ark-player__time">
-            -:--:-- --
-        </div>
+        <div class="ark-player__date">--/--/--</div>
+        <div class="ark-player__time">-:--:-- --</div>
     </div>
 </div>
 <!-- END OF MARKUP -->
+
+
+<p>The Ark Player widget has a number of parts that you should integrate into your web pages separately.</p>
+
+<ol>
+    <li>Links to the Ark Player's JavaScript and CSS assets</li>
+    <li>The Ark Player markup</li>
+    <li>Optional start links/buttons</li>
+    <li>JavaScript that initializes the player</li>
+</ol>
+
+
+<h2>1. Asset links</h2>
+
+<p>The Ark Player requires a JavaScript file and a CSS file. Link them in your page
+    head. On <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">this page</a>, for example, the asset links are</p>
+
+<code><pre>&lt;script src="static/lib/Spinitron.arkPlayer.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="static/lib/arkPlayer.css"&gt;</pre></code>
+
+<p>Your links will probably be different. Use URLs that point to your copies of
+    these two <code>.js</code> and <code>.css</code> asset files. You can obtain the files
+    from this repo or from these two links.</p>
+
+<ul>
+    <li><a href="https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/Spinitron.arkPlayer.js">https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/Spinitron.arkPlayer.js</a></li>
+    <li><a href="https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/arkPlayer.css"></a>https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/arkPlayer.css</li>
+</ul>
+
+
+<h2>2. Ark Player markup</h2>
+
+<p>The markup is a chunk of HTML for the Ark Player's user interface. Copy-paste it from the
+    <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a>.
+    The part to copy is indicated in the source.</p>
+
+<p>There's one change you need to make to the markup depending on your needs. The opening <code>&lt;div&gt;</code>
+can have an optional <code>data-ark-start</code> attribute with a value that controls the initial value of
+the player's starting date and time. For example, if the opening tag has a  like the one below</p>
+
+<code><pre>&lt;div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z"&gt;</pre></code>
+
 
 <h2>3. Start links/buttons</h2>
 
@@ -101,11 +126,9 @@ the player's starting date and time. For example, if the opening tag has a  like
     date-time must be in UTC and formatted as <code>yyyymmddThhmmssZ</code>. For exammple
 </p>
 
-<code><pre>
-    &lt;div data-ark-start="20201020T180000Z"&gt;Click me!&lt;/div&gt;
-</pre></code>
+<code><pre>&lt;div data-ark-start="20201020T180000Z"&gt;Click me!&lt;/div&gt;</pre></code>
 
-This makes block on the page and if the user clicks or touches it then the Ark Player starts
+<p>This makes block on the page and if the user clicks or touches it then the Ark Player starts
 playing that archive beginning at 18:00:00 UTC on Oct 20th 2020. (It doesn't need to be a <code>&lt;div&gt;</code>.
 Most visible elements should do.)</p>
 
@@ -113,15 +136,19 @@ Most visible elements should do.)</p>
     manually then you'll have to update them often. It may be more practical to generate them automatically with a script.
 </p>
 
+<p>View the <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a> to see
+    these three link examples.</p>
+
 <ul>
     <!-- EXAMPLE LINKS - you need to update them (automatically or otherwise) because the archive is only 2 weeks -->
-    <li><a class="ark-play-button" data-ark-start="20201020T180000Z"><img src="/static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
+    <li><a class="ark-play-button" data-ark-start="20201020T180000Z"><img src="static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
         Start the archive at such-and-such date and time</li>
-    <li><a class="ark-play-button" data-ark-start="20201020T170000Z"><img src="/static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
+    <li><a class="ark-play-button" data-ark-start="20201020T170000Z"><img src="static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
         Start at some other date and time</li>
-    <li><a class="ark-play-button" data-ark-start="20201020T160000Z"><img src="/static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
+    <li><a class="ark-play-button" data-ark-start="20201020T160000Z"><img src="static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
         Start at yet another date and time</li>
 </ul>
+
 
 <h2>4. Initialization JavaScript</h2>
 
@@ -131,7 +158,7 @@ Most visible elements should do.)</p>
     the specific code for your station.
 </p>
 
-<p>View the source of this page to see an example.</p>
+<p>View the <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a> to see an example.</p>
 
 <!-- INIT JAVASCRIPT - Use a version of this in your web pages modified for your station -->
 <script>
