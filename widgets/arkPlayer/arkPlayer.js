@@ -46,6 +46,21 @@ window.arkPlayer = function (container, options) {
         return;
     }
 
+    // based on https://medium.com/hackernoon/unlocking-web-audio-the-smarter-way-8858218c0e09
+    // but doesn't appear to help
+    if (AUDIO_CONTEXT.state === 'suspended' && 'ontouchstart' in window) {
+        (() => {
+            const unlock = function() {
+                AUDIO_CONTEXT.resume().then(function() {
+                    document.body.removeEventListener('touchstart', unlock);
+                    document.body.removeEventListener('touchend', unlock);
+                });
+            };
+            document.body.addEventListener('touchstart', unlock, false);
+            document.body.addEventListener('touchend', unlock, false);
+        })();
+    }
+
     const {
         template,
         data = {},
