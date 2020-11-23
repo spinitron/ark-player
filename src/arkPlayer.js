@@ -1,6 +1,3 @@
-import './arkPlayer.scss';
-import './icons/loudspeaker.svg';
-
 // Vars with relative time (e.g. a duration) are in seconds. AudioContext uses floats. Sometimes integer.
 // Date-time vars have a suffix:
 //   Timestamp (string) UTC date/time like "20200822T162000Z"

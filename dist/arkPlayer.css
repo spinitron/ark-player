@@ -1,0 +1,206 @@
+.ark-player {
+  width: 100%;
+  display: inline-flex;
+  position: relative;
+  height: 2.2em;
+  border: 2px solid #ccc;
+  color: #999;
+  fill: #999;
+  background: #eee;
+  margin-top: 1em;
+}
+.ark-player button {
+  cursor: pointer;
+  height: 100%;
+  outline: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 100%;
+}
+
+@media (min-width: 25em) {
+  .ark-player {
+    max-width: 18em;
+  }
+}
+.ark-player__control,
+.ark-player__status {
+  display: inline-block;
+  height: 100%;
+}
+
+.ark-player__control {
+  border-right: 2px solid #ccc;
+  text-align: center;
+  position: relative;
+}
+
+.ark-player__status {
+  width: 100%;
+  display: flex;
+  line-height: 2em;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  white-space: nowrap;
+}
+.ark-player__status.waiting {
+  border-radius: 10%;
+  color: black;
+  animation-name: pulse;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+.ark-player__status.waiting:hover {
+  animation: none;
+}
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.ark-player__date {
+  text-align: right;
+  width: 46%;
+  padding-right: 0.7em;
+}
+
+.ark-player__time {
+  text-align: left;
+  width: 54%;
+  padding-left: 0.7em;
+}
+
+.ark-player__picker {
+  display: flex;
+  width: 100%;
+}
+.ark-player__picker .ark-player__date {
+  padding: 0.1em 0.4em 0 0;
+}
+.ark-player__picker .ark-player__time {
+  padding: 0.1em 0 0 0.4em;
+}
+.ark-player__picker .select-css {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 1em;
+  color: #666;
+  line-height: 1.4;
+  vertical-align: -1px;
+  box-sizing: border-box;
+  margin: 0;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 0.1em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+.ark-player__picker .select-css::-ms-expand {
+  display: none;
+}
+.ark-player__picker .select-css:focus {
+  color: #000;
+}
+.ark-player__picker .select-css option {
+  font-weight: normal;
+}
+
+.ark-player__play,
+.ark-player__pause {
+  padding: 0.4em;
+  width: 2em;
+}
+.ark-player__play svg,
+.ark-player__pause svg {
+  height: 100%;
+  width: 100%;
+}
+
+.ark-player_hide {
+  display: none;
+}
+
+.ark-play-button {
+  opacity: 0.5;
+  width: 1.6em;
+  display: inline-block;
+}
+.ark-play-button.ark-ark-play-button_hide {
+  display: none;
+}
+
+.public-spins .ark-play-button {
+  display: block;
+  margin-top: 1em;
+}
+
+.ark-play-button-box {
+  display: inline-block;
+  width: 1.6rem;
+}
+
+.ark-player__volume-control {
+  position: relative;
+}
+@media (hover: none) {
+  .ark-player__volume-control {
+    display: none;
+  }
+}
+@media (hover: hover) {
+  .ark-player__volume-control {
+    display: inline-block;
+  }
+}
+.ark-player__volume-control .ark-player__mute-button {
+  width: 2em;
+  padding: 0;
+}
+.ark-player__volume-control:hover .ark-player__volume-area {
+  width: 4.4em !important;
+  transition: 0.3s;
+}
+.ark-player__volume-control .ark-player__volume-area {
+  transition: 0.3s;
+  display: inline-block;
+  position: absolute;
+  z-index: 10;
+  background-color: #eee;
+  border-right: 2px solid #ccc;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.ark-player__volume-control .ark-player__volume-area .ark-player__volume-slider {
+  margin-left: 0.25em;
+  -webkit-appearance: none;
+  width: 4em;
+  height: 3px;
+  border-radius: 1.5px;
+  background: #999;
+  outline: none;
+}
+.ark-player__volume-control .ark-player__volume-area .ark-player__volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #999;
+  cursor: pointer;
+}
+.ark-player__volume-control .ark-player__volume-area .ark-player__volume-slider::-moz-range-thumb {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #999;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=arkPlayer.css.map */
