@@ -1,3 +1,8 @@
+/* Copyright Spinitron LLC */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
 // Vars with relative time (e.g. a duration) are in seconds. AudioContext uses floats. Sometimes integer.
 // Date-time vars have a suffix:
 //   Timestamp (string) UTC date/time like "20200822T162000Z"
