@@ -1,176 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ark Player widget demo</title>
 
     <style>
-body {
-    color: #2d2d2d;
-    font: 1.1rem/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto, Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
-    max-width: 60em;
-    margin: 1em auto 4em;
+      html {
+        color: #222;
+        font-size: 1em;
+        line-height: 1.4;
+        color: #2d2d2d;
+      }
+
+      ::-moz-selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
+
+      ::selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
+
+      audio,
+      canvas,
+      iframe,
+      img,
+      svg,
+      video {
+        vertical-align: middle;
+      }
+      body {
+        font-family: sans-serif;
+    margin: 0 auto;
+    max-width: 60rem;      }
+
+      .page_container {
+        width: 98%;
+        max-width: 65rem;
+        margin: 1em auto 4em;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 2em 0 0;
+      }
+      p {
+        margin: 1em 0;
+      }
+      a,
+      a:visited {
+        color: blue;
+      }
+
+code, tt {
+    margin: 0 2px;
+    padding: 0 0.3em;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    font-family: Monaco, Consolas, monospace;
+    font-size: 0.85em;
+    color: #333;
 }
-h1,h2,h3 { margin: 2em 0 0; }
-h4,h5,h6 { font-size: 100%; }
-h5, h6 { text-transform: uppercase; }
-header h1 { border-bottom: 1px solid; }
-p { margin: 1em 0; }
-a,a:visited { color: blue; }
-code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-weight: bold; }
-code > pre { padding: 0; margin: 0 2em; font-weight: normal; }
-ul, ol { margin: 1em 0; padding: 0 0 0 4em; }
-.ark-play-button img { display: inline; }
 
-</style>
+pre > code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: 0;
+    background: transparent
+}
 
-    <script src="static/lib/Spinitron.arkPlayer.js"></script>
-    <link rel="stylesheet" href="static/lib/arkPlayer.css">
-</head>
-<body>
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    line-height: 1.5;
+    overflow: auto;
+    padding: 0.3em 0.6em;
+    border-radius: 3px
+}
 
-<h1>Ark Player widget</h1>
+pre code {
+    background-color: transparent;
+    border: 0
+}
 
-<p>This page is a demo of the Spinitron Ark Player widget. Source code for the widget and for
-    this web page is in the <a href="https://github.com/spinitron/ark-player">spinitron/ark-player</a>
-    Github repo.
-</p>
 
-<!-- MARKUP - the Ark Player widget markup. Copy-paste this to END OF MARKUP -->
-<div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z">
-    <div class="ark-player__control">
-        <button class="ark-player__play" aria-label="Play (k)" title="Play (k)">
-            <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z" />
-            </svg>
-        </button>
-        <button class="ark-player__pause ark-player_hide" aria-label="Pause (k)" title="Play (k)">
-            <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1664 192v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45zm-896 0v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45z" />
-            </svg>
-        </button>
-    </div>
+      ul,
+      ol {
+        margin: 1em 0;
+        padding: 0 0 0 2em;
+      }
+      .ark-play-button img {
+        display: inline;
+      }
 
-    <div class="ark-player__volume-control">
-        <button class="ark-player__mute-button" aria-label="Mute (m)" title="Mute (m)">
-            <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                <path class="ark-player__volume-speaker" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"></path>
-                <path class="ark-player__volume-slash" d="M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z" style="display: none;"></path>
-            </svg>
-        </button>
-        <div class="ark-player__volume-area"><input class="ark-player__volume-slider" type="range" min="0" max="100" value="100" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% volume"></div>
-    </div>
+      .hidden,
+      [hidden] {
+        display: none !important;
+      }
 
-    <div class="ark-player__picker">
-        <div class="ark-player__date"><select name="date" class="select-css"></select></div>
-        <div class="ark-player__time">
-            <select name="hours" class="select-css"></select>
-            <select name="minutes" class="select-css"></select>
+      @media only screen and (min-width: 35em) {
+        /* Style adjustments for viewports that meet the condition */
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/arkPlayer.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/arkPlayer.css"
+    />
+  </head>
+  <body>
+    <div class="page_container">
+        <h1>Ark Player widget</h1>
+
+        <p>This page is a demo of the Spinitron Ark Player widget. Source code for the widget and for
+            this web page is in the <a href="https://github.com/spinitron/ark-player">spinitron/ark-player</a>
+            Github repo.
+        </p>
+
+        <!-- MARKUP - the Ark Player widget markup. Copy-paste this to END OF MARKUP -->
+        <div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z">
+            <div class="ark-player__control">
+                <button class="ark-player__play" aria-label="Play (k)" title="Play (k)">
+                    <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z" />
+                    </svg>
+                </button>
+                <button class="ark-player__pause ark-player_hide" aria-label="Pause (k)" title="Play (k)">
+                    <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1664 192v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45zm-896 0v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45z" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="ark-player__volume-control">
+                <button class="ark-player__mute-button" aria-label="Mute (m)" title="Mute (m)">
+                    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                        <path class="ark-player__volume-speaker" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"></path>
+                        <path class="ark-player__volume-slash" d="M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z" style="display: none;"></path>
+                    </svg>
+                </button>
+                <div class="ark-player__volume-area"><input class="ark-player__volume-slider" type="range" min="0" max="100" value="100" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% volume"></div>
+            </div>
+
+            <div class="ark-player__picker">
+                <div class="ark-player__date"><select name="date" class="select-css"></select></div>
+                <div class="ark-player__time">
+                    <select name="hours" class="select-css"></select>
+                    <select name="minutes" class="select-css"></select>
+                </div>
+            </div>
+
+            <div class="ark-player__status ark-player_hide">
+                <div class="ark-player__date">--/--/--</div>
+                <div class="ark-player__time">-:--:-- --</div>
+            </div>
         </div>
-    </div>
+        <!-- END OF MARKUP -->
 
-    <div class="ark-player__status ark-player_hide">
-        <div class="ark-player__date">--/--/--</div>
-        <div class="ark-player__time">-:--:-- --</div>
-    </div>
-</div>
-<!-- END OF MARKUP -->
+        <p>The Ark Player widget has these parts that you should integrate into your web pages separately.</p>
 
-
-<p>The Ark Player widget has a number of parts that you should integrate into your web pages separately.</p>
-
-<ol>
-    <li>Links to the Ark Player's JavaScript and CSS assets</li>
-    <li>The Ark Player markup</li>
-    <li>Optional start links/buttons</li>
-    <li>JavaScript that initializes the player</li>
-</ol>
+        <ol>
+            <li>Links to the Ark Player's JavaScript and CSS assets</li>
+            <li>The Ark Player markup</li>
+            <li>Optional start links/buttons</li>
+            <li>JavaScript that initializes the player</li>
+        </ol>
 
 
-<h2>1. Asset links</h2>
+        <h2>1. Asset links</h2>
 
-<p>The Ark Player requires a JavaScript file and a CSS file. Link them in your page
-    head. On <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">this page</a>, for example, the asset links are</p>
+        <p>The Ark Player requires a JavaScript file and a CSS file. You can put links to the files in
+            the spinitron/ark-player Github repo. <a
+            href="https://github.com/spinitron/ark-player/blob/main/web/index.html">This page</a> uses the following
+            asset links that you can also use.</p>
 
-<code><pre>&lt;script src="static/lib/Spinitron.arkPlayer.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="static/lib/arkPlayer.css"&gt;</pre></code>
+        <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/arkPlayer.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/arkPlayer.css"&gt;</code></pre>
 
-<p>Your links will probably be different. Use URLs that point to your copies of
-    these two <code>.js</code> and <code>.css</code> asset files. You can obtain the files
-    from this repo or from these two links.</p>
-
-<ul>
-    <li><a href="https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/Spinitron.arkPlayer.js">https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/Spinitron.arkPlayer.js</a></li>
-    <li><a href="https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/arkPlayer.css"></a>https://raw.githubusercontent.com/spinitron/ark-player/main/web/static/lib/arkPlayer.css</li>
-</ul>
-
-
-<h2>2. Ark Player markup</h2>
-
-<p>The markup is a chunk of HTML for the Ark Player's user interface. Copy-paste it from the
-    <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a>.
-    The part to copy is indicated in the source.</p>
-
-<p>There's one change you need to make to the markup depending on your needs. The opening <code>&lt;div&gt;</code>
-can have an optional <code>data-ark-start</code> attribute with a value that controls the initial value of
-the player's starting date and time. For example, if the opening tag has a  like the one below</p>
-
-<code><pre>&lt;div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z"&gt;</pre></code>
+        <p>Alternatively you can copy the files from the <code>dist</code> directory of this repo
+            into your web site and link your copies.
+            If you are using NPM in your work then you can install the <a href="https://www.npmjs.com/package/ark-player">ark-player NPM
+            package</a>. Or you can fork this repo and make your own version. (Btw, if you change the
+            files in <code>src</code> directory then please publish your changes, preferably in a fork of this repo. We choice
+            <a href="https://choosealicense.com/licenses/mpl-2.0/">Mozilla Public License 2.0</a> for this work.)</p>
 
 
-<h2>3. Start links/buttons</h2>
+        <h2>2. Ark Player markup</h2>
 
-<p>You can put links, buttons, icons, or other elements on a page so that when the user clicks or touches them,
-    the Ark Player starts playing at a specific date and time. Any visible element with a
-    <code>data-ark-start</code> attribute with valid date-timestamp value becomes click/touchable. The
-    date-time must be in UTC and formatted as <code>yyyymmddThhmmssZ</code>. For exammple
-</p>
+        <p>The markup is a chunk of HTML for the Ark Player's user interface. Copy-paste it from the
+            <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a>.
+            The part to copy is indicated in HTML comments.</p>
 
-<code><pre>&lt;div data-ark-start="20201020T180000Z"&gt;Click me!&lt;/div&gt;</pre></code>
+        <p>There's one change you need to make to the markup depending on your needs. The opening <code>&lt;div&gt;</code>
+        can have an optional <code>data-ark-start</code> attribute with a value that controls the initial value of
+        the player's starting date and time. For example, if the opening tag is like this</p>
 
-<p>This makes block on the page and if the user clicks or touches it then the Ark Player starts
-playing that archive beginning at 18:00:00 UTC on Oct 20th 2020. (It doesn't need to be a <code>&lt;div&gt;</code>.
-Most visible elements should do.)</p>
+        <pre><code>&lt;div class="ark-player" id="ark-player" data-ark-start="20201020T100000Z"&gt;</code></pre>
 
-<p>The archive is limited to two weeks so start links with dates past the limit won't work. If you edit the links
-    manually then you'll have to update them often. It may be more practical to generate them automatically with a script.
-</p>
+        <p>then, on initial page load, the player is set so its play button starts the archive at 20201020T100000Z
+            i.e. 10:00 UTC on Oct 20th 2020.
+        </p>
 
-<p>View the <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a> to see
-    these three link examples.</p>
+        <h2>3. Start links/buttons</h2>
 
-<ul>
-    <!-- EXAMPLE LINKS - you need to update them (automatically or otherwise) because the archive is only 2 weeks -->
-    <li><a class="ark-play-button" data-ark-start="20201020T180000Z"><img src="static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
-        Start the archive at such-and-such date and time</li>
-    <li><a class="ark-play-button" data-ark-start="20201020T170000Z"><img src="static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
-        Start at some other date and time</li>
-    <li><a class="ark-play-button" data-ark-start="20201020T160000Z"><img src="static/images/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
-        Start at yet another date and time</li>
-</ul>
+        <p>You can put links, buttons, icons, or other elements on a page so that when the user clicks or touches them,
+            the Ark Player starts playing at a specific date and time. Any visible element with a
+            <code>data-ark-start</code> attribute with valid date-timestamp value becomes click/touchable. The
+            date-time must be in UTC and formatted as <code>yyyymmddThhmmssZ</code>. For exammple
+        </p>
+
+        <pre><code>&lt;div data-ark-start="20201020T180000Z"&gt;Click me!&lt;/div&gt;</code></pre>
+
+        <p>This makes a block on the page and if the user clicks or touches it then the Ark Player starts
+        playing that archive beginning at 18:00:00 UTC on Oct 20th 2020. (It doesn't need to be a <code>&lt;div&gt;</code>.
+        Most visible elements should do.) Here are three examples with
+        <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source code here</a>.</p>
+
+        <ul>
+            <!-- EXAMPLE LINKS - you need to update them (automatically or otherwise) because the archive is only 2 weeks -->
+            <li><a class="ark-play-button" data-ark-start="20201020T180000Z"><img
+                src="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
+                Start the archive at such-and-such date and time</li>
+            <li><a class="ark-play-button" data-ark-start="20201020T170000Z"><img
+                src="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
+                Start at some other date and time</li>
+            <li><a class="ark-play-button" data-ark-start="20201020T160000Z"><img
+                src="https://cdn.jsdelivr.net/npm/ark-player@2.0.0/dist/loudspeaker.svg" alt="Start archive player" width="24" height="24"></a>
+                Start at yet another date and time</li>
+        </ul>
+
+        <p><strong>NOTE</strong> These examples links don't work because they already expired.
+            Archives are available only for programing date-times between two weeks ago and about an hour ago relative to the time
+            the web visitor loads the page with the Ark Player. Static values for <code>data-ark-start</code> attributes
+            will therefore stop working after at most two weeks. It's more practical to use dynamic values, that is,
+            to generate date-time values for <code>data-ark-start</code> automatically with a script.
+        </p>
 
 
-<h2>4. Initialization JavaScript</h2>
+        <h2>4. Initialization JavaScript</h2>
 
-<p>Somewhere on the page you need to put initialization JavaScript. It's a small but of code in
-    <code>&lt;script&gt;</code> tags. The exact code you need must be configured for your station.
-    You shouldn't need to configure it more than once. Contact Spinitron to get
-    the specific code for your station.
-</p>
+        <p>Somewhere on the page you need to put initialization JavaScript. It's a small bit of code in
+            <code>&lt;script&gt;</code> tags. The exact code you need must be configured for your station.
+            You shouldn't need to configure it more than once. Contact Spinitron to get
+            the specific code for your station.
+        </p>
 
-<p>View the <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a> to see an example.</p>
+        <p>View the <a href="https://github.com/spinitron/ark-player/blob/main/web/index.html">source of this page</a> to see an example.</p>
 
-<!-- INIT JAVASCRIPT - Use a version of this in your web pages modified for your station -->
-<script>
-    // TODO: initialize widget with data attributes on the #ark-player element, then the script loading can be non-blocking (async)
-    window.arkPlayer(document.getElementById('ark-player'), {
-        template: 'https://ark-wzbc.s3.us-east-1.amazonaws.com/WZBC-{time}.mp3',
-        segmentDuration: 300,
-        timeZone: 'America/New_York',
-        enableDebug: true,
-    });
-</script>
-<!-- END OF INIT JAVASCRIPT -->
-
-</body>
+        <!-- INITIALIZATION JAVASCRIPT - Use a version of this in your web pages modified for your station -->
+        <script>
+            // todo initialize widget with data attributes on the #ark-player element, then the script loading can be non-blocking (async)
+            window.arkPlayer(document.getElementById('ark-player'), {
+                template: 'https://ark-wzbc.s3.us-east-1.amazonaws.com/WZBC-{time}.mp3',
+                segmentDuration: 300,
+                timeZone: 'America/New_York',
+                enableDebug: true,
+            });
+        </script>
+        <!-- END OF INITIALIZATION JAVASCRIPT -->
+        </div>
+  </body>
 </html>
