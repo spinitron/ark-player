@@ -1,11 +1,17 @@
 {
     "name": "ark-player",
+    "description": "Audio player for the Spinitron Ark radio webcast archive service",
+    "homepage": "https://github.com/spinitron/ark-player",
     "version": "2.0.0",
     "license": "MPL-2.0",
-    "main": "dist/arkPlayer.js",
+    "author": "Tom Worster <tom@spinitron.com>",
+    "browser": "dist/arkPlayer.js",
+    "repository": "github:spinitron/ark-player",
     "scripts": {
         "build": "babel src --out-dir dist && sass src/arkPlayer.scss dist/arkPlayer.css && cp src/loudspeaker.svg dist/loudspeaker.svg",
         "prepare": "npm run-script build"
+    },
+    "dependencies": {
     },
     "devDependencies": {
         "@babel/cli": "^7.12.7",
@@ -17,7 +23,5 @@
         "last 1 version",
         "> 5%",
         "ie 11"
-    ],
-    "dependencies": {
-    }
+    ]
 }

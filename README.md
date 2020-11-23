@@ -1,25 +1,52 @@
-## Example page
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 
-[https://spinitron.github.io/ark-player/web/index.html](https://spinitron.github.io/ark-player/web/index.html)
+The Spinitron Ark Player is a widget you can use on a web page. It allows
+visitors to play recordings of a radio webcast from Spinitron's Ark
+service.
+
+## Demo and instructions
+
+[Combined demo and instructions](https://spinitron.github.io/ark-player/) for web page authors on how to use the widget.
+
+
 
 ## Use the widget on your web site
 
-You can use the widget on your web site. The example page linked above has instructions.
+You can use the widget on your web site if you comply with these [Terms of Service](https://forum.spinitron.com/t/ark-terms-of-service/277). The
+example page linked above has instructions.
 
 ## Access to audio files
 
-If you run the Ark Player on a server of your own, you need to ask me to authorize your origin (CORS) to access the audio files.
+If you run the Ark Player on a server of your own and for listeners to access archives managed by Spinitron, ask Spinitron to authorize your origin (CORS) to access the audio files.
+
+## Using the widget as a dependency in your project
+
+If you're using NPM then you can
+
+```
+npm install ark-player
+```
+
+and import it from there into your project.
 
 ## Developer instructions
 
-Clone this repo and run `npm install`. The player's JavaScript and scss sources are in `widgets/arkPlayer`. To compile, run `npm libs`.
+If you intend customize or change the player, e.g. to change it style sheet
+or modify its behavior, please fork this repo in Github and push your changes
+to your repo. (We use MPL for this work to encourage you to give your improvments
+back to the community.) Feel free to send pull requests.
 
-The rest of this repo is tool chain, demo and legacy. You shouldn't need to deal with it.
+We use git, Sass, and NPM. Find instructions for using those elsewhere.
+
+Clone the git repo locally and then, in the repo dir, run `npm install`.
+
+After making your change in the `src` directory, `npm run build` should update the files in `dist`.
 
 ## Copyright and license
 
-All files in this repository are
+All files in this repository are Copyright Spinitron LLC.
 
-Copyright © 2020 Spinitron LLC All Rights Reserved
-
-After the Ark service is commercially released, the code here will be opened under a permissive license.
+You may use, modify, and/and redsitribute this work under conditions of the
+[Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/).

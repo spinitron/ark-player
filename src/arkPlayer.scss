@@ -1,4 +1,9 @@
-.ark-player {
+/* Copyright Spinitron LLC */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+ .ark-player {
     width: 100%;
     display: inline-flex;
     position: relative;
@@ -84,10 +89,10 @@
     width: 100%;
 
     .ark-player__date {
-        padding: 0.25em 0.4em 0 0;
+        padding: 0.3em 0.4em 0 0;
     }
     .ark-player__time {
-        padding: 0.25em 0 0 0.4em;
+        padding: 0.3em 0 0 0.4em;
     }
 
     .select-css {
@@ -184,7 +189,8 @@
         height: 100%;
         overflow: hidden;
         .ark-player__volume-slider {
-            margin-left: 0.25em;
+            display: block;
+            margin: 1.1em 0.25em 0 0;
             -webkit-appearance: none;
             width: 4em;
             height: 3px;

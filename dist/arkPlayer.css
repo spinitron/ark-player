@@ -80,10 +80,10 @@
   width: 100%;
 }
 .ark-player__picker .ark-player__date {
-  padding: 0.1em 0.4em 0 0;
+  padding: 0.3em 0.4em 0 0;
 }
 .ark-player__picker .ark-player__time {
-  padding: 0.1em 0 0 0.4em;
+  padding: 0.3em 0 0 0.4em;
 }
 .ark-player__picker .select-css {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
@@ -178,7 +178,8 @@
   overflow: hidden;
 }
 .ark-player__volume-control .ark-player__volume-area .ark-player__volume-slider {
-  margin-left: 0.25em;
+  display: block;
+  margin: 1.1em 0.25em 0 0;
   -webkit-appearance: none;
   width: 4em;
   height: 3px;
