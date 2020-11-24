@@ -48,21 +48,6 @@ window.arkPlayer = function (container, options) {
         return;
     }
 
-    // based on https://medium.com/hackernoon/unlocking-web-audio-the-smarter-way-8858218c0e09
-    // but doesn't appear to help
-    if (AUDIO_CONTEXT.state === 'suspended' && 'ontouchstart' in window) {
-        (() => {
-            const unlock = function() {
-                AUDIO_CONTEXT.resume().then(function() {
-                    document.body.removeEventListener('touchstart', unlock);
-                    document.body.removeEventListener('touchend', unlock);
-                });
-            };
-            document.body.addEventListener('touchstart', unlock, false);
-            document.body.addEventListener('touchend', unlock, false);
-        })();
-    }
-
     const {
         template,
         data = {},
@@ -76,6 +61,7 @@ window.arkPlayer = function (container, options) {
     let myFetchAhead = fetchAhead;
     const pickerOpts = { dates: [], hours: {} };
 
+    ensureAudioContextState('suspended');
     debug('ark player init: ', options, 'baseUrl', baseUrl);
 
     // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
@@ -277,10 +263,6 @@ window.arkPlayer = function (container, options) {
     });
 
     function startArk(startTimestamp) {
-        if (!(window.AudioContext || window.webkitAudioContext)) {
-            return;
-        }
-
         resetPlayer(false);
         setupPicker(startTimestamp);
 
@@ -340,21 +322,16 @@ window.arkPlayer = function (container, options) {
 
     function ensureAudioContextState(toState) {
         if (AUDIO_CONTEXT.state === toState) {
+            debug(`WebAudio was already ${toState}`)
             return;
         }
         if (toState === 'suspended') {
-            AUDIO_CONTEXT.suspend();
+            AUDIO_CONTEXT.suspend().then(() => debug(`WebAudio now ${toState}`));
         } else if (toState === 'running') {
-            AUDIO_CONTEXT.resume();
+            AUDIO_CONTEXT.resume().then(() => debug(`WebAudio now ${toState}`));
         } else {
             return;
         }
-        function waitForACState() {
-            if (AUDIO_CONTEXT.state !== toState) {
-                setTimeout(waitForACState, 3);
-            }
-        }
-        waitForACState();
     }
 
     /**

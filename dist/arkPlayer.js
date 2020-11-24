@@ -1,3 +1,8 @@
+/* Copyright Spinitron LLC */
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 // Vars with relative time (e.g. a duration) are in seconds. AudioContext uses floats. Sometimes integer.
 // Date-time vars have a suffix:
 //   Timestamp (string) UTC date/time like "20200822T162000Z"
@@ -33,22 +38,6 @@ window.arkPlayer = function (container, options) {
   } catch (ignore) {
     badLuck();
     return;
-  } // based on https://medium.com/hackernoon/unlocking-web-audio-the-smarter-way-8858218c0e09
-  // but doesn't appear to help
-
-
-  if (AUDIO_CONTEXT.state === 'suspended' && 'ontouchstart' in window) {
-    (() => {
-      const unlock = function () {
-        AUDIO_CONTEXT.resume().then(function () {
-          document.body.removeEventListener('touchstart', unlock);
-          document.body.removeEventListener('touchend', unlock);
-        });
-      };
-
-      document.body.addEventListener('touchstart', unlock, false);
-      document.body.addEventListener('touchend', unlock, false);
-    })();
   }
 
   const {
@@ -66,6 +55,7 @@ window.arkPlayer = function (container, options) {
     dates: [],
     hours: {}
   };
+  ensureAudioContextState('suspended');
   debug('ark player init: ', options, 'baseUrl', baseUrl); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
   // means use client's time zone instead of the station's.
 
@@ -263,10 +253,6 @@ window.arkPlayer = function (container, options) {
   });
 
   function startArk(startTimestamp) {
-    if (!(window.AudioContext || window.webkitAudioContext)) {
-      return;
-    }
-
     resetPlayer(false);
     setupPicker(startTimestamp);
     const d = startTimestamp.match(/^(\d\d\d\d)(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)Z$/).slice(1).map(δ => parseInt(δ, 10));
@@ -333,24 +319,17 @@ window.arkPlayer = function (container, options) {
 
   function ensureAudioContextState(toState) {
     if (AUDIO_CONTEXT.state === toState) {
+      debug(`WebAudio was already ${toState}`);
       return;
     }
 
     if (toState === 'suspended') {
-      AUDIO_CONTEXT.suspend();
+      AUDIO_CONTEXT.suspend().then(() => debug(`WebAudio now ${toState}`));
     } else if (toState === 'running') {
-      AUDIO_CONTEXT.resume();
+      AUDIO_CONTEXT.resume().then(() => debug(`WebAudio now ${toState}`));
     } else {
       return;
     }
-
-    function waitForACState() {
-      if (AUDIO_CONTEXT.state !== toState) {
-        setTimeout(waitForACState, 3);
-      }
-    }
-
-    waitForACState();
   }
   /**
    * @param {boolean=} force
