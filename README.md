@@ -10,8 +10,6 @@ service.
 
 [Combined demo and instructions](https://spinitron.github.io/ark-player/) for web page authors on how to use the widget.
 
-
-
 ## Use the widget on your web site
 
 You can use the widget on your web site if you comply with these [Terms of Service](https://forum.spinitron.com/t/ark-terms-of-service/277). The
@@ -33,8 +31,8 @@ and import it from there into your project.
 
 ## Developer instructions
 
-If you intend customize or change the player, e.g. to change it style sheet
-or modify its behavior, please fork this repo in Github and push your changes
+If you intend to customize or change the player, e.g. to change its appearance
+or behavior, please fork this repo in Github and push your changes
 to your repo. (We use MPL for this work to encourage you to give your improvments
 back to the community.) Feel free to send pull requests.
 

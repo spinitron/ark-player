@@ -11,8 +11,7 @@
         "build": "babel src --out-dir dist && sass src/arkPlayer.scss dist/arkPlayer.css && cp src/loudspeaker.svg dist/loudspeaker.svg",
         "prepare": "npm run-script build"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "@babel/cli": "^7.12.7",
         "@babel/core": "^7.12.7",

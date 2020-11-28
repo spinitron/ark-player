@@ -28,15 +28,15 @@ const DEFAULT_FETCH_AHEAD = 15;
  * @param {number=} options.fetchAhead in seconds
  */
 window.arkPlayer = function (container, options) {
-    function badLuck()
-    {
+    function badLuck() {
         // eslint-disable-next-line no-param-reassign
         container.outerHTML = "<div>The archive player doesn't work in this browser :(</div>";
         document.querySelectorAll('.ark-play-button').forEach((e) => e.classList.add('ark-ark-play-button_hide'));
     }
 
     try {
-        if (typeof AUDIO_CONTEXT !== 'object' ||
+        if (
+            typeof AUDIO_CONTEXT !== 'object' ||
             typeof AUDIO_CONTEXT.resume !== 'function' ||
             typeof AUDIO_CONTEXT.state !== 'string'
         ) {
@@ -126,10 +126,7 @@ window.arkPlayer = function (container, options) {
             }
             pickerOpts.hours[date].push([
                 hourDate.toLocaleTimeString(...localeStuff).replace(/:00:00 /, ' '),
-                hourDate
-                    .toISOString()
-                    .substring(0, 13)
-                    .replace(/-/g, ''),
+                hourDate.toISOString().substring(0, 13).replace(/-/g, ''),
             ]);
         }
 
@@ -184,9 +181,9 @@ window.arkPlayer = function (container, options) {
             c.querySelector('[name=date]').value = date;
             populateHours(c.querySelector('[name=hours]'), date);
             c.querySelector('[name=hours]').value = seekDateHour;
-            c.querySelector('[name=minutes]').value = `${Math.floor(
-                parseInt(copyOfTimestampParam.slice(11, 13), 10) / 15,
-            ) * 15}`.padStart(2, '0');
+            c.querySelector('[name=minutes]').value = `${
+                Math.floor(parseInt(copyOfTimestampParam.slice(11, 13), 10) / 15) * 15
+            }`.padStart(2, '0');
         }
     }
 
@@ -322,7 +319,7 @@ window.arkPlayer = function (container, options) {
 
     function ensureAudioContextState(toState) {
         if (AUDIO_CONTEXT.state === toState) {
-            debug(`WebAudio was already ${toState}`)
+            debug(`WebAudio was already ${toState}`);
             return;
         }
         if (toState === 'suspended') {
