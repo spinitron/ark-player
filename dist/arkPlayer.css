@@ -12,6 +12,7 @@
   fill: #999;
   background: #eee;
   margin-top: 1em;
+  line-height: initial;
 }
 .ark-player button {
   cursor: pointer;
