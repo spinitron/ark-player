@@ -6,7 +6,7 @@
 // Vars with relative time (e.g. a duration) are in seconds. AudioContext uses floats. Sometimes integer.
 // Date-time vars have a suffix:
 //   Timestamp (string) UTC date/time like "20200822T162000Z"
-//   Time (integer) JavaScript date/time, i.e. milliseconds since the unix epoc
+//   Time (integer) JavaScript date/time, i.e. milliseconds since the unix epoch
 
 const AUDIO_CONTEXT =
     window.AudioContext || window.webkitAudioContext ? new (window.AudioContext || window.webkitAudioContext)() : null;
@@ -83,7 +83,7 @@ window.arkPlayer = function (container, options) {
 
     // AudioContext time when the Ark was started
     let arkStartedAt = null;
-    // unix millisec in the archive corresponding to arkStartedAt
+    // unix milliseconds in the archive corresponding to arkStartedAt
     let arkStartTime = null;
 
     // setInterval timer ID for the monitor
