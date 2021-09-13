@@ -56,7 +56,7 @@ window.arkPlayer = function (container, options) {
         segmentDuration = DEFAULT_SEGMENT_DURATION,
         fetchAhead = DEFAULT_FETCH_AHEAD,
     } = options;
-    let baseStart = container.dataset.arkStart;
+    let baseStart = container.dataset.arkStart || `${(new Date((new Date()).getTime() - 7200000)).toISOString().substring(0, 13).replace(/-/g, '')}0000Z`;
     const baseUrl = Object.keys(data).reduce((url, key) => url.replaceAll(`{${key}}`, data[key]), template);
     let myFetchAhead = fetchAhead;
     const pickerOpts = { dates: [], hours: {} };
