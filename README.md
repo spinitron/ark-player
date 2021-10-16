@@ -13,7 +13,7 @@ service.
 ## Use the widget on your web site
 
 You can use the widget on your web site if you comply with these [Terms of Service](https://forum.spinitron.com/t/ark-terms-of-service/277). The
-example page linked above has instructions.
+demo page linked above has instructions.
 
 ## Access to audio files
 
@@ -33,10 +33,10 @@ and import it from there into your project.
 
 If you intend to customize or change the player, e.g. to change its appearance
 or behavior, please fork this repo in Github and push your changes
-to your repo. (We use MPL for this work to encourage you to give your improvments
+to your repo. (We use MPL for this work to encourage you to give your improvements
 back to the community.) Feel free to send pull requests.
 
-We use git, Sass, and NPM. Find instructions for using those elsewhere.
+We use git, Sass, Babel, Rollup and NPM. Find instructions for using those elsewhere.
 
 Clone the git repo locally and then, in the repo dir, run `npm install`.
 
@@ -46,5 +46,5 @@ After making your change in the `src` directory, `npm run build` should update t
 
 All files in this repository are Copyright Spinitron LLC.
 
-You may use, modify, and/and redsitribute this work under conditions of the
+You may use, modify, and/and redistribute this work under conditions of the
 [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/).
