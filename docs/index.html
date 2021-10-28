@@ -111,14 +111,16 @@
             }
         </style>
 
-    <script src="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/spinitron/ark-player@main/dist/arkPlayer.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.css">
-</head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spinitron/ark-player@main/dist/arkPlayer.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    </head>
     <body>
         <div class="page_container">
             <h1>Ark Player widget</h1>
-
+ark
             <p>This page is a demo of and instructions for the Spinitron Ark Player widget.</p>
 
             <p>
@@ -126,8 +128,69 @@
                 <a href="https://github.com/spinitron/ark-player">spinitron/ark-player</a>
             </p>
 
+            <div>
+                <label for="station-select">Choose a station</label>
+
+                <select class="ark_player_demo select_station" id="station-select">
+                    <option name="stations">-- Choose a station --</option>
+                    <option value="KAFM" data-timezone="America/Denver">KAFM</option>
+                    <option value="KAOS" data-timezone="America/Los_Angeles">KAOS</option>
+                    <option value="KBCS" data-timezone="America/Los_Angeles">KBCS</option>
+                    <option value="KBRP" data-timezone="America/Phoenix">KBRP</option>
+                    <option value="KCSB" data-timezone="America/Los_Angeles">KCSB</option>
+                    <option value="KCSM" data-timezone="America/Los_Angeles">KCSM</option>
+                    <option value="KDUR" data-timezone="America/Denver">KDUR</option>
+                    <option value="KGLP" data-timezone="America/Denver">KGLP</option>
+                    <option value="KKUP" data-timezone="America/Los_Angeles">KKUP</option>
+                    <option value="KMUZ" data-timezone="America/Los_Angeles">KMUZ</option>
+                    <option value="KNON" data-timezone="America/Chicago">KNON</option>
+                    <option value="KNSJ" data-timezone="America/Los_Angeles">KNSJ</option>
+                    <option value="KOPN" data-timezone="America/Chicago">KOPN</option>
+                    <option value="KOTO" data-timezone="America/Denver">KOTO</option>
+                    <option value="KPOO" data-timezone="America/Los_Angeles">KPOO</option>
+                    <option value="KPTZ" data-timezone="America/Los_Angeles">KPTZ</option>
+                    <option value="KSJD" data-timezone="America/Denver">KSJD</option>
+                    <option value="KSPC" data-timezone="America/Los_Angeles">KSPC</option>
+                    <option value="KSYM" data-timezone="America/Chicago">KSYM</option>
+                    <option value="KTNA" data-timezone="America/Anchorage">KTNA</option>
+                    <option value="KURU" data-timezone="America/Denver">KURU</option>
+                    <option value="KVCU" data-timezone="America/Denver">KVCU</option>
+                    <option value="KVRF" data-timezone="America/Anchorage">KVRF</option>
+                    <option value="KXCI" data-timezone="America/Phoenix">KXCI</option>
+                    <option value="KZFR" data-timezone="America/Los_Angeles">KZFR</option>
+                    <option value="KZMU" data-timezone="America/Denver">KZMU</option>
+                    <option value="KZSC" data-timezone="America/Los_Angeles">KZSC</option>
+                    <option value="WCOM" data-timezone="America/New_York">WCOM</option>
+                    <option value="WCUW" data-timezone="America/New_York">WCUW</option>
+                    <option value="WDNA" data-timezone="America/New_York">WDNA</option>
+                    <option value="WEFT" data-timezone="America/Chicago">WEFT</option>
+                    <option value="WELT" data-timezone="America/New_York">WELT</option>
+                    <option value="WERA" data-timezone="America/New_York">WERA</option>
+                    <option value="WERU" data-timezone="America/New_York">WERU</option>
+                    <option value="WESS" data-timezone="America/New_York">WESS</option>
+                    <option value="WEVL" data-timezone="America/Chicago">WEVL</option>
+                    <option value="WFHB" data-timezone="America/New_York">WFHB</option>
+                    <option value="WHCP" data-timezone="America/New_York">WHCP</option>
+                    <option value="WMMT" data-timezone="America/New_York">WMMT</option>
+                    <option value="WMRW" data-timezone="America/New_York">WMRW</option>
+                    <option value="WNMC" data-timezone="America/New_York">WNMC</option>
+                    <option value="WOWD" data-timezone="America/New_York">WOWD</option>
+                    <option value="WQSV" data-timezone="America/New_York">WQSV</option>
+                    <option value="WRFI" data-timezone="America/New_York">WRFI</option>
+                    <option value="WSCA" data-timezone="America/New_York">WSCA</option>
+                    <option value="WTIP" data-timezone="America/Chicago">WTIP</option>
+                    <option value="WUML" data-timezone="America/New_York">WUML</option>
+                    <option value="WVEW" data-timezone="America/New_York">WVEW</option>
+                    <option value="WXNA" data-timezone="America/Chicago">WXNA</option>
+                    <option value="WXOX" data-timezone="America/New_York">WXOX</option>
+                    <option value="WXPR" data-timezone="America/Chicago">WXPR</option>
+                    <option value="WZBC" data-timezone="America/New_York">WZBC</option>
+                </select>
+            </div>
+
             <!-- WIDGET MARKUP - the Ark Player widget markup. Copy-paste this to END OF WIDGET MARKUP -->
-            <div class="ark-player" id="ark-player" data-ark-start="20201122T220000Z">
+            <div class="ark-player" id="ark-player">
+                <video id="video" class="ark-player__media-element" style="width: 1px; height: 1px"></video>
                 <div class="ark-player__control">
                     <button class="ark-player__play" aria-label="Play (k)" title="Play (k)">
                         <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -206,20 +269,22 @@
 
             <h3>Access to audio files</h3>
 
-            <p>If you run the Ark Player on a server of your own and listeners will access audio archives managed
-                by Spinitron, ask Spinitron to authorize your origin (CORS) to access the audio files.</p>
+            <p>
+                If you run the Ark Player on a server of your own and listeners will access audio archives managed by
+                Spinitron, ask Spinitron to authorize your origin (CORS) to access the audio files.
+            </p>
 
             <h2>1. Asset links</h2>
 
             <p>
                 The Ark Player requires a JavaScript file and a CSS file. You can put links to the files in the
                 spinitron/ark-player Github repo.
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L114-L115">This page</a> uses the
-                following asset links that you can also use.
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L114-L115">This page</a> uses
+                the following asset links that you can also use.
             </p>
 
             <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.css"&gt;</code></pre>
+   &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.css"&gt;</code></pre>
 
             <p>
                 Alternatively you can copy the files from the <code>dist</code> directory of this repo into your web
@@ -239,8 +304,9 @@
 
             <p>
                 The markup is a chunk of HTML for the Ark Player's user interface. Copy it from the
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L129-L189">source of this page</a>. The
-                part to copy is indicated in HTML comments.
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L129-L189"
+                    >source of this page</a
+                >. The part to copy is indicated in HTML comments.
             </p>
 
             <p>
@@ -270,7 +336,9 @@
                 This makes a block on the page and if the user clicks or touches it then the Ark Player starts playing
                 that archive beginning at 18:00:00 UTC on Oct 20th 2020. (It doesn't need to be a
                 <code>&lt;div&gt;</code>. Most visible elements should do.) Here are three examples with
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L271-L301">source code here</a>.
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L271-L301"
+                    >source code here</a
+                >.
             </p>
 
             <ul>
@@ -325,21 +393,48 @@
 
             <p>
                 View the
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L331-L344">source of this page</a> to
-                see an example.
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L331-L344"
+                    >source of this page</a
+                >
+                to see an example.
             </p>
+
+            <script>
+                document.querySelector('.ark_player_demo.select_station').addEventListener('change', (event) => {
+                    const selection = event.target.selectedOptions[0];
+                    window.location.replace(
+                        `${window.location.origin}${window.location.pathname}?station=${selection.value}&zone=${selection.dataset.timezone}`,
+                    );
+                });
+
+                const searchParams = new URLSearchParams(window.location.search);
+                const stationName = searchParams.get('station');
+                const timeZone = searchParams.get('zone');
+                document.querySelector('.ark_player_demo.select_station').value = stationName;
+            </script>
 
             <!-- INITIALIZATION JAVASCRIPT - Use a version of this in your web pages modified for your station -->
             <script>
                 // todo initialize widget with data attributes on the #ark-player element, then the script loading can be non-blocking (async)
-                window.arkPlayer(document.getElementById('ark-player'), {
-                    template: 'https://ark-wzbc.s3.us-east-1.amazonaws.com/WZBC-{time}.mp3',
-                    segmentDuration: 300,
+                window.ark2Player(document.getElementById('ark-player'), {
+                    stationName: stationName,
                     // display player controls and status in this zone. should normally be the station zone.
                     // NOTE some older browsers don't support it in which case the player uses the client's zone
-                    timeZone: 'America/New_York',
+                    timeZone: timeZone,
                     // enables writing to the browser console
                     enableDebug: true,
+                    mediaSessionMetadata: {
+                        title: stationName + ' archive player',
+                        artist: 'Webcast wayback machine',
+                        album: 'Album blah',
+                        artwork: [
+                            {
+                                src: 'https://spinitron.com/images/Station/18-img_logo.225x225.png?v=1512677078',
+                                sizes: '170x51',
+                                type: 'image/png',
+                            },
+                        ],
+                    },
                 });
             </script>
             <!-- END OF INITIALIZATION JAVASCRIPT -->

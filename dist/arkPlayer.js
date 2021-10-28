@@ -1786,115 +1786,10 @@
     }];
   }, !REPLACE_SUPPORTS_NAMED_GROUPS || !REPLACE_KEEPS_$0 || REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE);
 
-  var $$7 = _export;
-  var toObject$1 = toObject$5;
-  var nativeKeys = objectKeys$1;
-  var fails$2 = fails$f;
-  var FAILS_ON_PRIMITIVES = fails$2(function () {
-    nativeKeys(1);
-  }); // `Object.keys` method
-  // https://tc39.es/ecma262/#sec-object.keys
-
-  $$7({
-    target: 'Object',
-    stat: true,
-    forced: FAILS_ON_PRIMITIVES
-  }, {
-    keys: function keys(it) {
-      return nativeKeys(toObject$1(it));
-    }
-  });
-
-  var isObject$2 = isObject$9;
-  var classof = classofRaw$1;
   var wellKnownSymbol$6 = wellKnownSymbol$d;
-  var MATCH$1 = wellKnownSymbol$6('match'); // `IsRegExp` abstract operation
-  // https://tc39.es/ecma262/#sec-isregexp
-
-  var isRegexp = function (it) {
-    var isRegExp;
-    return isObject$2(it) && ((isRegExp = it[MATCH$1]) !== undefined ? !!isRegExp : classof(it) == 'RegExp');
-  };
-
-  var $$6 = _export;
-  var requireObjectCoercible$4 = requireObjectCoercible$9;
-  var isCallable = isCallable$e;
-  var isRegExp$1 = isRegexp;
-  var toString$4 = toString$8;
-  var getMethod$1 = getMethod$4;
-  var getRegExpFlags = regexpFlags$1;
-  var getSubstitution = getSubstitution$2;
-  var wellKnownSymbol$5 = wellKnownSymbol$d;
-  var REPLACE = wellKnownSymbol$5('replace');
-  var RegExpPrototype = RegExp.prototype;
-  var max$1 = Math.max;
-
-  var stringIndexOf = function (string, searchValue, fromIndex) {
-    if (fromIndex > string.length) return -1;
-    if (searchValue === '') return fromIndex;
-    return string.indexOf(searchValue, fromIndex);
-  }; // `String.prototype.replaceAll` method
-  // https://tc39.es/ecma262/#sec-string.prototype.replaceall
-
-
-  $$6({
-    target: 'String',
-    proto: true
-  }, {
-    replaceAll: function replaceAll(searchValue, replaceValue) {
-      var O = requireObjectCoercible$4(this);
-      var IS_REG_EXP, flags, replacer, string, searchString, functionalReplace, searchLength, advanceBy, replacement;
-      var position = 0;
-      var endOfLastMatch = 0;
-      var result = '';
-
-      if (searchValue != null) {
-        IS_REG_EXP = isRegExp$1(searchValue);
-
-        if (IS_REG_EXP) {
-          flags = toString$4(requireObjectCoercible$4('flags' in RegExpPrototype ? searchValue.flags : getRegExpFlags.call(searchValue)));
-          if (!~flags.indexOf('g')) throw TypeError('`.replaceAll` does not allow non-global regexes');
-        }
-
-        replacer = getMethod$1(searchValue, REPLACE);
-
-        if (replacer) {
-          return replacer.call(searchValue, O, replaceValue);
-        }
-      }
-
-      string = toString$4(O);
-      searchString = toString$4(searchValue);
-      functionalReplace = isCallable(replaceValue);
-      if (!functionalReplace) replaceValue = toString$4(replaceValue);
-      searchLength = searchString.length;
-      advanceBy = max$1(1, searchLength);
-      position = stringIndexOf(string, searchString, 0);
-
-      while (position !== -1) {
-        if (functionalReplace) {
-          replacement = toString$4(replaceValue(searchString, position, string));
-        } else {
-          replacement = getSubstitution(searchString, string, position, [], undefined, replaceValue);
-        }
-
-        result += string.slice(endOfLastMatch, position) + replacement;
-        endOfLastMatch = position + searchLength;
-        position = stringIndexOf(string, searchString, position + advanceBy);
-      }
-
-      if (endOfLastMatch < string.length) {
-        result += string.slice(endOfLastMatch);
-      }
-
-      return result;
-    }
-  });
-
-  var wellKnownSymbol$4 = wellKnownSymbol$d;
   var create = objectCreate;
   var definePropertyModule$1 = objectDefineProperty;
-  var UNSCOPABLES = wellKnownSymbol$4('unscopables');
+  var UNSCOPABLES = wellKnownSymbol$6('unscopables');
   var ArrayPrototype = Array.prototype; // Array.prototype[@@unscopables]
   // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 
@@ -1910,12 +1805,12 @@
     ArrayPrototype[UNSCOPABLES][key] = true;
   };
 
-  var $$5 = _export;
+  var $$7 = _export;
   var $includes = arrayIncludes.includes;
   var addToUnscopables = addToUnscopables$1; // `Array.prototype.includes` method
   // https://tc39.es/ecma262/#sec-array.prototype.includes
 
-  $$5({
+  $$7({
     target: 'Array',
     proto: true
   }, {
@@ -1928,18 +1823,29 @@
 
   addToUnscopables('includes');
 
-  var isRegExp = isRegexp;
+  var isObject$2 = isObject$9;
+  var classof = classofRaw$1;
+  var wellKnownSymbol$5 = wellKnownSymbol$d;
+  var MATCH$1 = wellKnownSymbol$5('match'); // `IsRegExp` abstract operation
+  // https://tc39.es/ecma262/#sec-isregexp
+
+  var isRegexp = function (it) {
+    var isRegExp;
+    return isObject$2(it) && ((isRegExp = it[MATCH$1]) !== undefined ? !!isRegExp : classof(it) == 'RegExp');
+  };
+
+  var isRegExp$1 = isRegexp;
 
   var notARegexp = function (it) {
-    if (isRegExp(it)) {
+    if (isRegExp$1(it)) {
       throw TypeError("The method doesn't accept regular expressions");
     }
 
     return it;
   };
 
-  var wellKnownSymbol$3 = wellKnownSymbol$d;
-  var MATCH = wellKnownSymbol$3('match');
+  var wellKnownSymbol$4 = wellKnownSymbol$d;
+  var MATCH = wellKnownSymbol$4('match');
 
   var correctIsRegexpLogic = function (METHOD_NAME) {
     var regexp = /./;
@@ -1958,14 +1864,14 @@
     return false;
   };
 
-  var $$4 = _export;
+  var $$6 = _export;
   var notARegExp = notARegexp;
-  var requireObjectCoercible$3 = requireObjectCoercible$9;
-  var toString$3 = toString$8;
+  var requireObjectCoercible$4 = requireObjectCoercible$9;
+  var toString$4 = toString$8;
   var correctIsRegExpLogic = correctIsRegexpLogic; // `String.prototype.includes` method
   // https://tc39.es/ecma262/#sec-string.prototype.includes
 
-  $$4({
+  $$6({
     target: 'String',
     proto: true,
     forced: !correctIsRegExpLogic('includes')
@@ -1973,7 +1879,7 @@
     includes: function includes(searchString
     /* , position = 0 */
     ) {
-      return !!~toString$3(requireObjectCoercible$3(this)).indexOf(toString$3(notARegExp(searchString)), arguments.length > 1 ? arguments[1] : undefined);
+      return !!~toString$4(requireObjectCoercible$4(this)).indexOf(toString$4(notARegExp(searchString)), arguments.length > 1 ? arguments[1] : undefined);
     }
   });
 
@@ -1986,16 +1892,16 @@
     if (propertyKey in object) definePropertyModule.f(object, propertyKey, createPropertyDescriptor(0, value));else object[propertyKey] = value;
   };
 
-  var fails$1 = fails$f;
-  var wellKnownSymbol$2 = wellKnownSymbol$d;
+  var fails$2 = fails$f;
+  var wellKnownSymbol$3 = wellKnownSymbol$d;
   var V8_VERSION$1 = engineV8Version;
-  var SPECIES$1 = wellKnownSymbol$2('species');
+  var SPECIES$1 = wellKnownSymbol$3('species');
 
   var arrayMethodHasSpeciesSupport$3 = function (METHOD_NAME) {
     // We can't use this feature detection in V8 since it causes
     // deoptimization and serious performance degradation
     // https://github.com/zloirock/core-js/issues/677
-    return V8_VERSION$1 >= 51 || !fails$1(function () {
+    return V8_VERSION$1 >= 51 || !fails$2(function () {
       var array = [];
       var constructor = array.constructor = {};
 
@@ -2009,24 +1915,24 @@
     });
   };
 
-  var $$3 = _export;
-  var fails = fails$f;
+  var $$5 = _export;
+  var fails$1 = fails$f;
   var isArray$1 = isArray$3;
   var isObject$1 = isObject$9;
-  var toObject = toObject$5;
+  var toObject$1 = toObject$5;
   var lengthOfArrayLike$1 = lengthOfArrayLike$4;
   var createProperty$1 = createProperty$2;
   var arraySpeciesCreate = arraySpeciesCreate$2;
   var arrayMethodHasSpeciesSupport$2 = arrayMethodHasSpeciesSupport$3;
-  var wellKnownSymbol$1 = wellKnownSymbol$d;
+  var wellKnownSymbol$2 = wellKnownSymbol$d;
   var V8_VERSION = engineV8Version;
-  var IS_CONCAT_SPREADABLE = wellKnownSymbol$1('isConcatSpreadable');
+  var IS_CONCAT_SPREADABLE = wellKnownSymbol$2('isConcatSpreadable');
   var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
   var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded'; // We can't use this feature detection in V8 since it causes
   // deoptimization and serious performance degradation
   // https://github.com/zloirock/core-js/issues/679
 
-  var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails(function () {
+  var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails$1(function () {
     var array = [];
     array[IS_CONCAT_SPREADABLE] = false;
     return array.concat()[0] !== array;
@@ -2043,14 +1949,14 @@
   // https://tc39.es/ecma262/#sec-array.prototype.concat
   // with adding support of @@isConcatSpreadable and @@species
 
-  $$3({
+  $$5({
     target: 'Array',
     proto: true,
     forced: FORCED
   }, {
     // eslint-disable-next-line no-unused-vars -- required for `.length`
     concat: function concat(arg) {
-      var O = toObject(this);
+      var O = toObject$1(this);
       var A = arraySpeciesCreate(O, 0);
       var n = 0;
       var i, k, length, len, E;
@@ -2074,7 +1980,7 @@
     }
   });
 
-  var $$2 = _export;
+  var $$4 = _export;
   var isArray = isArray$3;
   var isConstructor = isConstructor$2;
   var isObject = isObject$9;
@@ -2082,16 +1988,16 @@
   var lengthOfArrayLike = lengthOfArrayLike$4;
   var toIndexedObject = toIndexedObject$4;
   var createProperty = createProperty$2;
-  var wellKnownSymbol = wellKnownSymbol$d;
+  var wellKnownSymbol$1 = wellKnownSymbol$d;
   var arrayMethodHasSpeciesSupport$1 = arrayMethodHasSpeciesSupport$3;
   var HAS_SPECIES_SUPPORT$1 = arrayMethodHasSpeciesSupport$1('slice');
-  var SPECIES = wellKnownSymbol('species');
+  var SPECIES = wellKnownSymbol$1('species');
   var nativeSlice = [].slice;
-  var max = Math.max; // `Array.prototype.slice` method
+  var max$1 = Math.max; // `Array.prototype.slice` method
   // https://tc39.es/ecma262/#sec-array.prototype.slice
   // fallback for not array-like ES3 strings and DOM objects
 
-  $$2({
+  $$4({
     target: 'Array',
     proto: true,
     forced: !HAS_SPECIES_SUPPORT$1
@@ -2119,7 +2025,7 @@
         }
       }
 
-      result = new (Constructor === undefined ? Array : Constructor)(max(fin - k, 0));
+      result = new (Constructor === undefined ? Array : Constructor)(max$1(fin - k, 0));
 
       for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k]);
 
@@ -2129,12 +2035,12 @@
   });
 
   var toIntegerOrInfinity = toIntegerOrInfinity$5;
-  var toString$2 = toString$8;
-  var requireObjectCoercible$2 = requireObjectCoercible$9; // `String.prototype.repeat` method implementation
+  var toString$3 = toString$8;
+  var requireObjectCoercible$3 = requireObjectCoercible$9; // `String.prototype.repeat` method implementation
   // https://tc39.es/ecma262/#sec-string.prototype.repeat
 
   var stringRepeat = function repeat(count) {
-    var str = toString$2(requireObjectCoercible$2(this));
+    var str = toString$3(requireObjectCoercible$3(this));
     var result = '';
     var n = toIntegerOrInfinity(count);
     if (n < 0 || n == Infinity) throw RangeError('Wrong number of repetitions');
@@ -2145,17 +2051,17 @@
   };
 
   var toLength$1 = toLength$4;
-  var toString$1 = toString$8;
+  var toString$2 = toString$8;
   var repeat = stringRepeat;
-  var requireObjectCoercible$1 = requireObjectCoercible$9;
+  var requireObjectCoercible$2 = requireObjectCoercible$9;
   var ceil = Math.ceil; // `String.prototype.{ padStart, padEnd }` methods implementation
 
   var createMethod = function (IS_END) {
     return function ($this, maxLength, fillString) {
-      var S = toString$1(requireObjectCoercible$1($this));
+      var S = toString$2(requireObjectCoercible$2($this));
       var intMaxLength = toLength$1(maxLength);
       var stringLength = S.length;
-      var fillStr = fillString === undefined ? ' ' : toString$1(fillString);
+      var fillStr = fillString === undefined ? ' ' : toString$2(fillString);
       var fillLen, stringFiller;
       if (intMaxLength <= stringLength || fillStr == '') return S;
       fillLen = intMaxLength - stringLength;
@@ -2177,12 +2083,12 @@
   var userAgent = engineUserAgent;
   var stringPadWebkitBug = /Version\/10(?:\.\d+){1,2}(?: [\w./]+)?(?: Mobile\/\w+)? Safari\//.test(userAgent);
 
-  var $$1 = _export;
+  var $$3 = _export;
   var $padStart = stringPad.start;
   var WEBKIT_BUG = stringPadWebkitBug; // `String.prototype.padStart` method
   // https://tc39.es/ecma262/#sec-string.prototype.padstart
 
-  $$1({
+  $$3({
     target: 'String',
     proto: true,
     forced: WEBKIT_BUG
@@ -2194,14 +2100,14 @@
     }
   });
 
-  var $ = _export;
+  var $$2 = _export;
   var $map = arrayIteration.map;
   var arrayMethodHasSpeciesSupport = arrayMethodHasSpeciesSupport$3;
   var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('map'); // `Array.prototype.map` method
   // https://tc39.es/ecma262/#sec-array.prototype.map
   // with adding support of @@species
 
-  $({
+  $$2({
     target: 'Array',
     proto: true,
     forced: !HAS_SPECIES_SUPPORT
@@ -2216,9 +2122,9 @@
   var fixRegExpWellKnownSymbolLogic = fixRegexpWellKnownSymbolLogic;
   var anObject = anObject$8;
   var toLength = toLength$4;
-  var toString = toString$8;
-  var requireObjectCoercible = requireObjectCoercible$9;
-  var getMethod = getMethod$4;
+  var toString$1 = toString$8;
+  var requireObjectCoercible$1 = requireObjectCoercible$9;
+  var getMethod$1 = getMethod$4;
   var advanceStringIndex = advanceStringIndex$2;
   var regExpExec = regexpExecAbstract; // @@match logic
 
@@ -2226,14 +2132,14 @@
     return [// `String.prototype.match` method
     // https://tc39.es/ecma262/#sec-string.prototype.match
     function match(regexp) {
-      var O = requireObjectCoercible(this);
-      var matcher = regexp == undefined ? undefined : getMethod(regexp, MATCH);
-      return matcher ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](toString(O));
+      var O = requireObjectCoercible$1(this);
+      var matcher = regexp == undefined ? undefined : getMethod$1(regexp, MATCH);
+      return matcher ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](toString$1(O));
     }, // `RegExp.prototype[@@match]` method
     // https://tc39.es/ecma262/#sec-regexp.prototype-@@match
     function (string) {
       var rx = anObject(this);
-      var S = toString(string);
+      var S = toString$1(string);
       var res = maybeCallNative(nativeMatch, rx, S);
       if (res.done) return res.value;
       if (!rx.global) return regExpExec(rx, S);
@@ -2244,7 +2150,7 @@
       var result;
 
       while ((result = regExpExec(rx, S)) !== null) {
-        var matchStr = toString(result[0]);
+        var matchStr = toString$1(result[0]);
         A[n] = matchStr;
         if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
         n++;
@@ -2254,32 +2160,106 @@
     }];
   });
 
+  var $$1 = _export;
+  var toObject = toObject$5;
+  var nativeKeys = objectKeys$1;
+  var fails = fails$f;
+  var FAILS_ON_PRIMITIVES = fails(function () {
+    nativeKeys(1);
+  }); // `Object.keys` method
+  // https://tc39.es/ecma262/#sec-object.keys
+
+  $$1({
+    target: 'Object',
+    stat: true,
+    forced: FAILS_ON_PRIMITIVES
+  }, {
+    keys: function keys(it) {
+      return nativeKeys(toObject(it));
+    }
+  });
+
+  var $ = _export;
+  var requireObjectCoercible = requireObjectCoercible$9;
+  var isCallable = isCallable$e;
+  var isRegExp = isRegexp;
+  var toString = toString$8;
+  var getMethod = getMethod$4;
+  var getRegExpFlags = regexpFlags$1;
+  var getSubstitution = getSubstitution$2;
+  var wellKnownSymbol = wellKnownSymbol$d;
+  var REPLACE = wellKnownSymbol('replace');
+  var RegExpPrototype = RegExp.prototype;
+  var max = Math.max;
+
+  var stringIndexOf = function (string, searchValue, fromIndex) {
+    if (fromIndex > string.length) return -1;
+    if (searchValue === '') return fromIndex;
+    return string.indexOf(searchValue, fromIndex);
+  }; // `String.prototype.replaceAll` method
+  // https://tc39.es/ecma262/#sec-string.prototype.replaceall
+
+
+  $({
+    target: 'String',
+    proto: true
+  }, {
+    replaceAll: function replaceAll(searchValue, replaceValue) {
+      var O = requireObjectCoercible(this);
+      var IS_REG_EXP, flags, replacer, string, searchString, functionalReplace, searchLength, advanceBy, replacement;
+      var position = 0;
+      var endOfLastMatch = 0;
+      var result = '';
+
+      if (searchValue != null) {
+        IS_REG_EXP = isRegExp(searchValue);
+
+        if (IS_REG_EXP) {
+          flags = toString(requireObjectCoercible('flags' in RegExpPrototype ? searchValue.flags : getRegExpFlags.call(searchValue)));
+          if (!~flags.indexOf('g')) throw TypeError('`.replaceAll` does not allow non-global regexes');
+        }
+
+        replacer = getMethod(searchValue, REPLACE);
+
+        if (replacer) {
+          return replacer.call(searchValue, O, replaceValue);
+        }
+      }
+
+      string = toString(O);
+      searchString = toString(searchValue);
+      functionalReplace = isCallable(replaceValue);
+      if (!functionalReplace) replaceValue = toString(replaceValue);
+      searchLength = searchString.length;
+      advanceBy = max(1, searchLength);
+      position = stringIndexOf(string, searchString, 0);
+
+      while (position !== -1) {
+        if (functionalReplace) {
+          replacement = toString(replaceValue(searchString, position, string));
+        } else {
+          replacement = getSubstitution(searchString, string, position, [], undefined, replaceValue);
+        }
+
+        result += string.slice(endOfLastMatch, position) + replacement;
+        endOfLastMatch = position + searchLength;
+        position = stringIndexOf(string, searchString, position + advanceBy);
+      }
+
+      if (endOfLastMatch < string.length) {
+        result += string.slice(endOfLastMatch);
+      }
+
+      return result;
+    }
+  });
+
   /* Copyright Spinitron LLC */
 
   /* This Source Code Form is subject to the terms of the Mozilla Public
    * License, v. 2.0. If a copy of the MPL was not distributed with this
    * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-  // Vars with relative time (e.g. a duration) are in seconds. AudioContext uses floats. Sometimes integer.
-  // Date-time vars have a suffix:
-  //   Timestamp (string) UTC date/time like "20200822T162000Z"
-  //   Time (integer) JavaScript date/time, i.e. milliseconds since the unix epoch
-  var AUDIO_CONTEXT = window.AudioContext || window.webkitAudioContext ? new (window.AudioContext || window.webkitAudioContext)() : null; // Nominal duration (seconds) to calculate next segment URL from previous
-
-  var DEFAULT_SEGMENT_DURATION = 300; // Start fetching next segment ahead of end of playback of the current one
-
-  var DEFAULT_FETCH_AHEAD = 15;
-  /**
-   * TODO: figure out why "export default" doesn't allow to import the function as Spinitron.arkPlayer
-   * @param {HTMLElement} container
-   * @param {Object} options
-   * @param {string} options.template
-   * @param {{[string]: string}=} options.data
-   * @param {boolean=} options.enableDebug
-   * @param {number=} options.segmentDuration in seconds
-   * @param {number=} options.fetchAhead in seconds
-   */
-
-  window.arkPlayer = function (container, options) {
+  window.ark2Player = function (container, options) {
     function badLuck() {
       // eslint-disable-next-line no-param-reassign
       container.outerHTML = "<div>The archive player doesn't work in this browser :(</div>";
@@ -2289,36 +2269,36 @@
     }
 
     try {
-      if (_typeof(AUDIO_CONTEXT) !== 'object' || typeof AUDIO_CONTEXT.resume !== 'function' || typeof AUDIO_CONTEXT.state !== 'string') {
+      if (!Hls.isSupported()) {
         badLuck();
-        return;
       }
     } catch (ignore) {
       badLuck();
       return;
     }
 
-    var template = options.template,
-        _options$data = options.data,
-        data = _options$data === void 0 ? {} : _options$data,
+    var stationName = options.stationName,
         timeZone = options.timeZone,
         _options$enableDebug = options.enableDebug,
         enableDebug = _options$enableDebug === void 0 ? false : _options$enableDebug,
-        _options$segmentDurat = options.segmentDuration,
-        segmentDuration = _options$segmentDurat === void 0 ? DEFAULT_SEGMENT_DURATION : _options$segmentDurat,
-        _options$fetchAhead = options.fetchAhead,
-        fetchAhead = _options$fetchAhead === void 0 ? DEFAULT_FETCH_AHEAD : _options$fetchAhead;
+        _options$mediaSession = options.mediaSessionMetadata,
+        mediaSessionMetadata = _options$mediaSession === void 0 ? {} : _options$mediaSession,
+        _options$hlsBaseUrl = options.hlsBaseUrl,
+        hlsBaseUrl = _options$hlsBaseUrl === void 0 ? 'https://ark2.spinitron.com/ark2' : _options$hlsBaseUrl,
+        _options$errorReportU = options.errorReportUrl,
+        errorReportUrl = _options$errorReportU === void 0 ? 'https://ark2.spinitron.com/errorlog/' : _options$errorReportU;
+    /** @type {HTMLMediaElement} */
+
+    var theMediaElement = container.querySelector('.ark-player__media-element');
+    var myhls = new Hls();
+    var pleaseReload = true;
     var baseStart = container.dataset.arkStart || "".concat(new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, ''), "0000Z");
-    var baseUrl = Object.keys(data).reduce(function (url, key) {
-      return url.replaceAll("{".concat(key, "}"), data[key]);
-    }, template);
-    var myFetchAhead = fetchAhead;
     var pickerOpts = {
       dates: [],
       hours: {}
     };
-    ensureAudioContextState('suspended');
-    debug('ark player init: ', options, 'baseUrl', baseUrl); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
+    var arkStartTime = null;
+    debug('ark player init: ', options); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
     // means use client's time zone instead of the station's.
 
     var localeStuff = function () {
@@ -2340,31 +2320,10 @@
 
     var playerControl = container.querySelector('.ark-player__control');
     var playerStatus = container.querySelector('.ark-player__status');
-    var playerPicker = container.querySelector('.ark-player__picker'); // AudioContext time when the Ark was started
-
-    var arkStartedAt = null; // unix milliseconds in the archive corresponding to arkStartedAt
-
-    var arkStartTime = null; // setInterval timer ID for the monitor
-
-    var monitorInterval; // currentSegment and nextSegment can be a dictionary with
-    //   segmentTime: unix milliseconds used to make the segment URL
-    //   source: AudioBufferSourceNode with the segment's audio
-    //   started: AudioContext's time at which the audio is/was scheduled to start
-    //   offset: how much of the first segment to skip. 0 for subsequent segments
-    // currentSegment is always a segment dictionary after Ark start
-
-    var currentSegment = null; // nextSegment may be
-    // - null when the current segment is simply playing or before Ark start
-    // - an XMLHttpRequest if the next segment was requested but is not yet received and decoded
-    // - a segment dictionary like currentSegment when it's ready
-
-    var nextSegment = null; // on 404, try to download this many next segments
-
-    var remainingTryNexts = 5;
-    resetPlayer();
+    var playerPicker = container.querySelector('.ark-player__picker');
+    resetPlayer(); // Initialize pickerOpts, the date-time picker database.
 
     (function () {
-      // Initialize pickerOpts, the date-time picker database.
       var n = new Date();
       var stop = n.getTime() - 14 * 86400 * 1000;
       var hour = new Date(n.getFullYear(), n.getMonth(), n.getDate(), n.getHours()).getTime();
@@ -2439,14 +2398,62 @@
       }
     }
 
+    function resetPlayer() {
+      debug('resetPlayer');
+      arkStartTime = null;
+      pleaseReload = true;
+      playerStatus.querySelector('.ark-player__date').innerHTML = '--/--/--';
+      playerStatus.querySelector('.ark-player__time').innerHTML = '-:--:-- --';
+      playerStatus.classList.toggle('waiting', true);
+    }
+
     function playButton() {
-      if (getPlayerState() === 'not-started') {
-        if (baseStart) {
-          startArk(baseStart);
-        }
+      if (pleaseReload) {
+        startArk(baseStart);
       } else {
-        togglePlay();
+        if (theMediaElement.paused) {
+          theMediaElement.play();
+        } else {
+          theMediaElement.pause();
+        }
+
+        updateDisplay();
       }
+    }
+
+    function startArk(startTimestamp) {
+      resetPlayer();
+      setupPicker(startTimestamp);
+      debug("startArk(".concat(startTimestamp, ")"));
+      var d = startTimestamp.match(/^(\d\d\d\d)(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)Z$/).slice(1).map(function (δ) {
+        return parseInt(δ, 10);
+      });
+      arkStartTime = Date.UTC(d[0], d[1] - 1, d[2], d[3], d[4], d[5]);
+      var playlistUrl = "".concat(hlsBaseUrl, "/").concat(stationName, "-").concat(startTimestamp, "/index.m3u8");
+      myhls.attachMedia(theMediaElement);
+      myhls.on(Hls.Events.MEDIA_ATTACHED, function () {
+        console.log('video and hls.js are now bound together !');
+        myhls.loadSource(playlistUrl);
+        pleaseReload = false;
+        myhls.on(Hls.Events.ERROR, handleHlsError);
+        myhls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+          console.log('manifest loaded, found ' + data.levels.length + ' quality level. calling play...');
+          theMediaElement.play();
+
+          theMediaElement.ontimeupdate = function () {
+            updateTime();
+          };
+
+          updateDisplay();
+
+          if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata(mediaSessionMetadata);
+            navigator.mediaSession.setActionHandler('seekbackward', function () {});
+            navigator.mediaSession.setActionHandler('seekforward', function () {});
+            navigator.mediaSession.setActionHandler('seekto', function () {});
+          }
+        });
+      });
     }
 
     var volume = function () {
@@ -2469,6 +2476,379 @@
         either: function either() {
           _slider.value = muted ? '0' : "".concat(vol);
           slash.style.cssText = muted || vol === 0 ? '' : 'display:none';
+          theMediaElement.volume = (muted ? 0 : vol) / 100;
+        }
+      };
+
+      _slider.addEventListener('change', m.slider);
+
+      _slider.addEventListener('input', m.slider);
+
+      mute.addEventListener('click', m.muteButton);
+      m.slider();
+      return m;
+    }();
+    /**
+     * Play/pause button.
+     */
+
+
+    playerControl.addEventListener('click', playButton);
+    /**
+     * Start playing when almost any element with specified [data-ark-start] is clicked.
+     */
+
+    document.addEventListener('click', function (e) {
+      var element = e.target.closest('[data-ark-start]');
+
+      if (!element || element === container) {
+        return;
+      }
+
+      e.preventDefault();
+      startArk(element.dataset.arkStart);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.isComposing || e.keyCode === 229 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
+        return;
+      }
+
+      if (e.key === 'k') {
+        playButton();
+      } else if (e.key === 'm') {
+        volume.muteButton();
+      }
+    });
+
+    function updateDisplay() {
+      var hide = 'ark-player_hide'; // Show the player if it was hidden when no start time provided.
+
+      container.classList.toggle(hide, false);
+      playerControl.querySelector('.ark-player__play').classList.toggle(hide, !theMediaElement.paused);
+      playerControl.querySelector('.ark-player__pause').classList.toggle(hide, theMediaElement.paused);
+      playerPicker.classList.toggle(hide, !theMediaElement.paused);
+      playerStatus.classList.toggle(hide, theMediaElement.paused);
+    }
+
+    function updateTime() {
+      if (arkStartTime) {
+        var arkTime = new Date(arkStartTime + Math.round(1000 * theMediaElement.currentTime));
+        var timestring = arkTime.toLocaleDateString.apply(arkTime, _toConsumableArray(localeStuff)).replace(/(^\d\d?\/\d\d?\/)\d\d(\d\d)/, '$1$2');
+        playerStatus.querySelector('.ark-player__date').innerHTML = timestring;
+        playerStatus.querySelector('.ark-player__time').innerHTML = arkTime.toLocaleTimeString.apply(arkTime, _toConsumableArray(localeStuff));
+        playerStatus.classList.toggle('waiting', false);
+
+        if ('mediaSession' in navigator) {
+          mediaSessionMetadata.adbum = timestring;
+          navigator.mediaSession.metadata = new MediaMetadata(mediaSessionMetadata);
+        }
+      }
+    }
+
+    function debug() {
+      if (enableDebug) {
+        var _console;
+
+        for (var _len = arguments.length, stuff = new Array(_len), _key = 0; _key < _len; _key++) {
+          stuff[_key] = arguments[_key];
+        }
+
+        // eslint-disable-next-line no-console
+        (_console = console).log.apply(_console, ["".concat(new Date().toLocaleTimeString(), " ")].concat(stuff));
+      }
+    }
+
+    function handleHlsError(event, data) {
+      if (data.fatal) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', errorReportUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+          userAgent: navigator.userAgent,
+          location: document.location,
+          stationName: stationName,
+          timeZone: timeZone,
+          hlsBaseUrl: hlsBaseUrl,
+          data: data
+        }));
+
+        switch (data.type) {
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            debug('fatal network error');
+            myhls.startLoad();
+            break;
+
+          case Hls.ErrorTypes.MEDIA_ERROR:
+            debug('fatal media error');
+            myhls.recoverMediaError();
+            break;
+
+          default:
+            debug('unrecoverable fatal error, des');
+            myhls.destroy();
+        }
+      }
+    }
+    /**
+     * @param {HTMLElement} selectEl
+     */
+
+
+    function populateDate(selectEl) {
+      pickerOpts.dates.forEach(function (date, i) {
+        // eslint-disable-next-line no-param-reassign
+        selectEl[i] = new Option(date, date);
+      });
+    }
+    /**
+     * @param {HTMLElement} selectEl
+     */
+
+
+    function populateHours(selectEl, date) {
+      var hourSelect = selectEl;
+      var previousSelection = hourSelect.selectedOptions[0] && hourSelect.selectedOptions[0].innerText;
+
+      while (hourSelect.options.length > 0) {
+        hourSelect.remove(0);
+      }
+
+      var l = pickerOpts.hours[date].length - 1;
+
+      for (var i = 0; i <= l; i += 1) {
+        hourSelect[i] = new Option(pickerOpts.hours[date][l - i][0], pickerOpts.hours[date][l - i][1]);
+
+        if (previousSelection && hourSelect[i].innerText === previousSelection) {
+          hourSelect[i].selected = true;
+        }
+      }
+    }
+    /**
+     * @param {HTMLElement} selectEl
+     * @param {number} step
+     */
+
+
+    function populateMinutes(selectEl) {
+      ['00', '15', '30', '45'].forEach(function (minute, i) {
+        // eslint-disable-next-line no-param-reassign
+        selectEl[i] = new Option(":".concat(minute), minute);
+      });
+    }
+  };
+  /* ------------------------------------------------------------------------------------------------------------------- */
+  // Vars with relative time (e.g. a duration) are in seconds. AudioContext uses floats. Sometimes integer.
+  // Date-time vars have a suffix:
+  //   Timestamp (string) UTC date/time like "20200822T162000Z"
+  //   Time (integer) JavaScript date/time, i.e. milliseconds since the unix epoch
+
+
+  var AUDIO_CONTEXT = window.AudioContext || window.webkitAudioContext ? new (window.AudioContext || window.webkitAudioContext)() : null; // Nominal duration (seconds) to calculate next segment URL from previous
+
+  var DEFAULT_SEGMENT_DURATION = 300; // Start fetching next segment ahead of end of playback of the current one
+
+  var DEFAULT_FETCH_AHEAD = 15;
+  /**
+   * TODO: figure out why "export default" doesn't allow to import the function as Spinitron.arkPlayer
+   * @param {HTMLElement} container
+   * @param {Object} options
+   * @param {string} options.template
+   * @param {{[string]: string}=} options.data
+   * @param {boolean=} options.enableDebug
+   * @param {number=} options.segmentDuration in seconds
+   * @param {number=} options.fetchAhead in seconds
+   */
+
+  window.arkPlayer = function (container, options) {
+    function badLuck() {
+      // eslint-disable-next-line no-param-reassign
+      container.outerHTML = "<div>The archive player doesn't work in this browser :(</div>";
+      document.querySelectorAll('.ark-play-button').forEach(function (e) {
+        return e.classList.add('ark-ark-play-button_hide');
+      });
+    }
+
+    try {
+      if (_typeof(AUDIO_CONTEXT) !== 'object' || typeof AUDIO_CONTEXT.resume !== 'function' || typeof AUDIO_CONTEXT.state !== 'string') {
+        badLuck();
+        return;
+      }
+    } catch (ignore) {
+      badLuck();
+      return;
+    }
+
+    var template = options.template,
+        _options$data = options.data,
+        data = _options$data === void 0 ? {} : _options$data,
+        timeZone = options.timeZone,
+        _options$enableDebug2 = options.enableDebug,
+        enableDebug = _options$enableDebug2 === void 0 ? false : _options$enableDebug2,
+        _options$segmentDurat = options.segmentDuration,
+        segmentDuration = _options$segmentDurat === void 0 ? DEFAULT_SEGMENT_DURATION : _options$segmentDurat,
+        _options$fetchAhead = options.fetchAhead,
+        fetchAhead = _options$fetchAhead === void 0 ? DEFAULT_FETCH_AHEAD : _options$fetchAhead;
+    var baseStart = container.dataset.arkStart || "".concat(new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, ''), "0000Z");
+    var baseUrl = Object.keys(data).reduce(function (url, key) {
+      return url.replaceAll("{".concat(key, "}"), data[key]);
+    }, template);
+    var myFetchAhead = fetchAhead;
+    var pickerOpts = {
+      dates: [],
+      hours: {}
+    };
+    ensureAudioContextState('suspended');
+    debug('ark player init: ', options, 'baseUrl', baseUrl); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
+    // means use client's time zone instead of the station's.
+
+    var localeStuff = function () {
+      var β = '?';
+
+      try {
+        β = new Date().toLocaleString(['en-US', {
+          timeZone: timeZone
+        }]);
+      } catch (ignore) {
+        return [];
+      }
+
+      debug(β);
+      return ['en-US', {
+        timeZone: timeZone
+      }];
+    }();
+
+    var playerControl = container.querySelector('.ark-player__control');
+    var playerStatus = container.querySelector('.ark-player__status');
+    var playerPicker = container.querySelector('.ark-player__picker'); // AudioContext time when the Ark was started
+
+    var arkStartedAt = null; // unix milliseconds in the archive corresponding to arkStartedAt
+
+    var arkStartTime = null; // setInterval timer ID for the monitor
+
+    var monitorInterval; // currentSegment and nextSegment can be a dictionary with
+    //   segmentTime: unix milliseconds used to make the segment URL
+    //   source: AudioBufferSourceNode with the segment's audio
+    //   started: AudioContext's time at which the audio is/was scheduled to start
+    //   offset: how much of the first segment to skip. 0 for subsequent segments
+    // currentSegment is always a segment dictionary after Ark start
+
+    var currentSegment = null; // nextSegment may be
+    // - null when the current segment is simply playing or before Ark start
+    // - an XMLHttpRequest if the next segment was requested but is not yet received and decoded
+    // - a segment dictionary like currentSegment when it's ready
+
+    var nextSegment = null; // on 404, try to download this many next segments
+
+    var remainingTryNexts = 5;
+    resetPlayer();
+
+    (function () {
+      // Initialize pickerOpts, the date-time picker database.
+      var n = new Date();
+      var stop = n.getTime() - 14 * 86400 * 1000;
+      var hour = new Date(n.getFullYear(), n.getMonth(), n.getDate(), n.getHours()).getTime();
+      var hourDate;
+      var date;
+
+      while (hour > stop) {
+        var _hourDate3, _hourDate4;
+
+        hour -= 3600 * 1000;
+        hourDate = new Date(hour);
+        date = (_hourDate3 = hourDate).toLocaleDateString.apply(_hourDate3, _toConsumableArray(localeStuff)).replace(/\d\d(\d\d)$/, '$1');
+
+        if (!pickerOpts.dates.includes(date)) {
+          pickerOpts.dates.push(date);
+          pickerOpts.hours[date] = [];
+        }
+
+        pickerOpts.hours[date].push([(_hourDate4 = hourDate).toLocaleTimeString.apply(_hourDate4, _toConsumableArray(localeStuff)).replace(/:00:00 /, ' '), hourDate.toISOString().substring(0, 13).replace(/-/g, '')]);
+      } // Initialize the date-time picker selectors and their options.
+
+
+      var dateEl = container.querySelector('[name=date]');
+      var hoursEl = container.querySelector('[name=hours]');
+      var minutesEl = container.querySelector('[name=minutes]');
+      populateDate(dateEl);
+      dateEl.addEventListener('change', function () {
+        populateHours(hoursEl, dateEl.value);
+        pickerChanged();
+      });
+      hoursEl.addEventListener('change', pickerChanged);
+      populateHours(hoursEl, dateEl.value);
+      minutesEl.addEventListener('change', pickerChanged);
+      populateMinutes(minutesEl);
+
+      function pickerChanged() {
+        resetPlayer();
+        baseStart = "".concat(hoursEl.value).concat(minutesEl.value, "00Z");
+      }
+
+      setupPicker();
+    })();
+    /**
+     * Adjust the date-time picker to the given start.
+     * @param {String} timestamp in ark player format
+     */
+
+
+    function setupPicker(timestamp) {
+      var copyOfTimestampParam = timestamp === undefined ? baseStart : timestamp;
+      var seekDateHour = copyOfTimestampParam.slice(0, 11); // Search the date-time picker's database for seekDateHour
+
+      var date;
+      pickerOpts.dates.some(function (d) {
+        return pickerOpts.hours[d].some(function (h) {
+          if (seekDateHour === h[1]) {
+            date = d;
+            return true;
+          }
+
+          return false;
+        });
+      });
+
+      if (date) {
+        // Adjust the picker's selections and hour options.
+        var c = container;
+        c.querySelector('[name=date]').value = date;
+        populateHours(c.querySelector('[name=hours]'), date);
+        c.querySelector('[name=hours]').value = seekDateHour;
+        c.querySelector('[name=minutes]').value = "".concat(Math.floor(parseInt(copyOfTimestampParam.slice(11, 13), 10) / 15) * 15).padStart(2, '0');
+      }
+    }
+
+    function playButton() {
+      if (getPlayerState() === 'not-started') {
+        if (baseStart) {
+          startArk(baseStart);
+        }
+      } else {
+        togglePlay();
+      }
+    }
+
+    var volume = function () {
+      var muted = false;
+
+      var _slider2 = document.querySelector('.ark-player__volume-slider');
+
+      var slash = document.querySelector('.ark-player__volume-slash');
+      var mute = document.querySelector('.ark-player__mute-button');
+      var vol;
+      var m = {
+        muteButton: function muteButton() {
+          muted = !muted;
+          m.either();
+        },
+        slider: function slider() {
+          vol = parseInt(_slider2.value, 10);
+          m.either();
+        },
+        either: function either() {
+          _slider2.value = muted ? '0' : "".concat(vol);
+          slash.style.cssText = muted || vol === 0 ? '' : 'display:none';
           var gain = (muted ? 0 : vol) / 100;
 
           if (currentSegment && currentSegment.gainNode) {
@@ -2481,9 +2861,9 @@
         }
       };
 
-      _slider.addEventListener('change', m.slider);
+      _slider2.addEventListener('change', m.slider);
 
-      _slider.addEventListener('input', m.slider);
+      _slider2.addEventListener('input', m.slider);
 
       mute.addEventListener('click', m.muteButton);
       m.slider();
@@ -2792,14 +3172,14 @@
 
     function debug() {
       if (enableDebug) {
-        var _console;
+        var _console2;
 
-        for (var _len = arguments.length, stuff = new Array(_len), _key = 0; _key < _len; _key++) {
-          stuff[_key] = arguments[_key];
+        for (var _len2 = arguments.length, stuff = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          stuff[_key2] = arguments[_key2];
         }
 
         // eslint-disable-next-line no-console
-        (_console = console).log.apply(_console, ["".concat(new Date().toLocaleTimeString(), " ac.ct=").concat(AUDIO_CONTEXT.currentTime)].concat(stuff));
+        (_console2 = console).log.apply(_console2, ["".concat(new Date().toLocaleTimeString(), " ac.ct=").concat(AUDIO_CONTEXT.currentTime)].concat(stuff));
       }
     }
     /**
