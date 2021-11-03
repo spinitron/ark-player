@@ -4,21 +4,6 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
  window.ark2Player = function (container, options) {
-    function badLuck() {
-        // eslint-disable-next-line no-param-reassign
-        container.outerHTML = "<div>The archive player doesn't work in this browser :(</div>";
-        document.querySelectorAll('.ark-play-button').forEach((e) => e.classList.add('ark-ark-play-button_hide'));
-    }
-
-    try {
-        if (!Hls.isSupported()) {
-            badLuck();
-        }
-    } catch (ignore) {
-        badLuck();
-        return;
-    }
-
     const {
         stationName,
         timeZone,
@@ -30,14 +15,13 @@
 
     /** @type {HTMLMediaElement} */
     var theMediaElement = container.querySelector('.ark-player__media-element');
-    var myhls = new Hls();
+    var myhls;
     var pleaseReload = true;
     let baseStart =
         container.dataset.arkStart ||
         `${new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, '')}0000Z`;
     const pickerOpts = { dates: [], hours: {} };
     var arkStartTime = null;
-    var previousTime = 0;
 
     debug('ark player init: ', options);
 
@@ -161,11 +145,24 @@
         }
     }
 
-    function startArk(startTimestamp) {
-        resetPlayer();
-        setupPicker(startTimestamp);
+    function pressPlay() {
+        theMediaElement.play();
+        theMediaElement.ontimeupdate = () => {
+            updateTime();
+        };
+        updateDisplay();
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata(mediaSessionMetadata);
+            navigator.mediaSession.setActionHandler('seekbackward', () => {});
+            navigator.mediaSession.setActionHandler('seekforward', () => {});
+            navigator.mediaSession.setActionHandler('seekto', () => {});
+        }
+    }
 
+    function startArk(startTimestamp) {
         debug(`startArk(${startTimestamp})`);
+
+        setupPicker(startTimestamp);
 
         const d = startTimestamp
             .match(/^(\d\d\d\d)(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)Z$/)
@@ -175,27 +172,27 @@
 
         const playlistUrl = `${hlsBaseUrl}/${stationName}-${startTimestamp}/index.m3u8`;
 
-        myhls.attachMedia(theMediaElement);
-        myhls.on(Hls.Events.MEDIA_ATTACHED, function () {
-            console.log('video and hls.js are now bound together !');
-            myhls.loadSource(playlistUrl);
+        if (theMediaElement.canPlayType('application/vnd.apple.mpegurl')) {
+            debug("Using native HLS");
+            theMediaElement.src = playlistUrl;
             pleaseReload = false;
-            myhls.on(Hls.Events.ERROR, handleHlsError);
-            myhls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                console.log('manifest loaded, found ' + data.levels.length + ' quality level. calling play...');
-                theMediaElement.play();
-                theMediaElement.ontimeupdate = () => {
-                    updateTime();
-                };
-                updateDisplay();
-                if ('mediaSession' in navigator) {
-                    navigator.mediaSession.metadata = new MediaMetadata(mediaSessionMetadata);
-                    navigator.mediaSession.setActionHandler('seekbackward', () => {});
-                    navigator.mediaSession.setActionHandler('seekforward', () => {});
-                    navigator.mediaSession.setActionHandler('seekto', () => {});
-                }
+            pressPlay();
+        } else if (Hls.isSupported()) {
+            debug("Using Hls.js");
+            if (myhls === undefined) {
+                myhls = new Hls();
+            }
+            myhls.attachMedia(theMediaElement);
+            myhls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                myhls.loadSource(playlistUrl);
+                pleaseReload = false;
+                myhls.on(Hls.Events.ERROR, handleHlsError);
+                myhls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    console.log('manifest loaded, found ' + data.levels.length + ' quality level. calling play...');
+                    pressPlay();
+                });
             });
-        });
+        }
     }
 
     const volume = (() => {
@@ -280,28 +277,31 @@
         }
     }
 
+    function telemetry(data) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', errorReportUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        const body = JSON.stringify({
+            userAgent: navigator.userAgent,
+            location: document.location.href,
+            stationName,
+            timeZone,
+            hlsBaseUrl,
+            data,
+        });
+        xhr.send(body);
+    }
+
     function debug(...stuff) {
         if (enableDebug) {
-            // eslint-disable-next-line no-console
             console.log(`${new Date().toLocaleTimeString()} `, ...stuff);
+            telemetry(stuff);
         }
     }
 
     function handleHlsError(event, data) {
         if (data.fatal) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', errorReportUrl, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(
-                JSON.stringify({
-                    userAgent: navigator.userAgent,
-                    location: document.location,
-                    stationName,
-                    timeZone,
-                    hlsBaseUrl,
-                    data,
-                }),
-            );
+            telemetry(data);
 
             switch (data.type) {
                 case Hls.ErrorTypes.NETWORK_ERROR:
