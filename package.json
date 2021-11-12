@@ -2,7 +2,7 @@
     "name": "ark-player",
     "description": "Audio player for the Spinitron Ark radio webcast archive service",
     "homepage": "https://github.com/spinitron/ark-player",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "license": "MPL-2.0",
     "author": "Tom Worster <tom@spinitron.com>",
     "browser": "dist/arkPlayer.js",
