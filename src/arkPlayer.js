@@ -8,7 +8,6 @@
         stationName,
         timeZone,
         enableDebug = false,
-        mediaSessionMetadata = {},
         hlsBaseUrl = 'https://ark2.spinitron.com/ark2',
         errorReportUrl = 'https://ark2.spinitron.com/errorlog/',
     } = options;
@@ -151,12 +150,6 @@
             updateTime();
         };
         updateDisplay();
-        if ('mediaSession' in navigator) {
-            navigator.mediaSession.metadata = new MediaMetadata(mediaSessionMetadata);
-            navigator.mediaSession.setActionHandler('seekbackward', () => {});
-            navigator.mediaSession.setActionHandler('seekforward', () => {});
-            navigator.mediaSession.setActionHandler('seekto', () => {});
-        }
     }
 
     function startArk(startTimestamp) {
@@ -188,7 +181,6 @@
                 pleaseReload = false;
                 myhls.on(Hls.Events.ERROR, handleHlsError);
                 myhls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    console.log('manifest loaded, found ' + data.levels.length + ' quality level. calling play...');
                     pressPlay();
                 });
             });
@@ -270,10 +262,6 @@
             playerStatus.querySelector('.ark-player__date').innerHTML = timestring;
             playerStatus.querySelector('.ark-player__time').innerHTML = arkTime.toLocaleTimeString(...localeStuff);
             playerStatus.classList.toggle('waiting', false);
-            if ('mediaSession' in navigator) {
-                mediaSessionMetadata.adbum = timestring;
-                navigator.mediaSession.metadata = new MediaMetadata(mediaSessionMetadata);
-            }
         }
     }
 
