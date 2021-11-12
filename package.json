@@ -8,9 +8,10 @@
     "browser": "dist/arkPlayer.js",
     "repository": "github:spinitron/ark-player",
     "scripts": {
+        "pscp": "Set-Alias -Name cp -Value copy",
         "build": "npm run compile && npm run assets",
         "compile": "rollup -c",
-        "assets": "sass src/arkPlayer.scss dist/arkPlayer.css && cp src/loudspeaker.svg dist/loudspeaker.svg",
+        "assets": "sass src/arkPlayer.scss dist/arkPlayer.css && doskey cp=copy || cp src/loudspeaker.svg dist/loudspeaker.svg",
         "prepare": "npm run-script build"
     },
     "dependencies": {
