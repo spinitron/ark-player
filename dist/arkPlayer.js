@@ -2462,12 +2462,7 @@
       arkStartTime = Date.UTC(d[0], d[1] - 1, d[2], d[3], d[4], d[5]);
       var playlistUrl = "".concat(hlsBaseUrl, "/").concat(stationName, "-").concat(startTimestamp, "/index.m3u8");
 
-      if (theMediaElement.canPlayType('application/vnd.apple.mpegurl')) {
-        debug("Using native HLS");
-        theMediaElement.src = playlistUrl;
-        pleaseReload = false;
-        pressPlay();
-      } else if (Hls.isSupported()) {
+      if (Hls.isSupported()) {
         debug("Using Hls.js");
 
         if (myhls === undefined) {
@@ -2483,6 +2478,11 @@
             pressPlay();
           });
         });
+      } else if (theMediaElement.canPlayType('application/vnd.apple.mpegurl')) {
+        debug("Using native HLS");
+        theMediaElement.src = playlistUrl;
+        pleaseReload = false;
+        pressPlay();
       }
     }
 
