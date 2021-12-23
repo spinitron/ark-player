@@ -179,11 +179,13 @@
                     pressPlay();
                 });
             });
+            document.querySelector('.ark-player__mode-hint').innerHTML = 'H';
         } else if (theMediaElement.canPlayType('application/vnd.apple.mpegurl')) {
             debug("Using native HLS");
             theMediaElement.src = playlistUrl;
             pleaseReload = false;
             pressPlay();
+            document.querySelector('.ark-player__mode-hint').innerHTML = 'N';
         }
     }
 
