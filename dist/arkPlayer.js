@@ -2306,9 +2306,8 @@
         _options$enableDebug = options.enableDebug,
         enableDebug = _options$enableDebug === void 0 ? false : _options$enableDebug,
         _options$hlsBaseUrl = options.hlsBaseUrl,
-        hlsBaseUrl = _options$hlsBaseUrl === void 0 ? 'https://ark2.spinitron.com/ark2' : _options$hlsBaseUrl,
-        _options$errorReportU = options.errorReportUrl,
-        errorReportUrl = _options$errorReportU === void 0 ? 'https://ark2.spinitron.com/errorlog/' : _options$errorReportU;
+        hlsBaseUrl = _options$hlsBaseUrl === void 0 ? 'https://ark2.spinitron.com/ark2' : _options$hlsBaseUrl;
+        options.errorReportUrl;
     /** @type {HTMLMediaElement} */
 
     var theMediaElement = container.querySelector('.ark-player__media-element');
@@ -2572,21 +2571,6 @@
       }
     }
 
-    function telemetry(data) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', errorReportUrl, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      var body = JSON.stringify({
-        userAgent: navigator.userAgent,
-        location: document.location.href,
-        stationName: stationName,
-        timeZone: timeZone,
-        hlsBaseUrl: hlsBaseUrl,
-        data: data
-      });
-      xhr.send(body);
-    }
-
     function debug() {
       if (enableDebug) {
         var _console;
@@ -2595,16 +2579,14 @@
           stuff[_key] = arguments[_key];
         }
 
-        (_console = console).log.apply(_console, ["".concat(new Date().toLocaleTimeString(), " ")].concat(stuff));
+        (_console = console).log.apply(_console, ["".concat(new Date().toLocaleTimeString(), " ")].concat(stuff)); //telemetry(stuff);
 
-        telemetry(stuff);
       }
     }
 
     function handleHlsError(event, data) {
       if (data.fatal) {
-        telemetry(data);
-
+        //telemetry(data);
         switch (data.type) {
           case Hls.ErrorTypes.NETWORK_ERROR:
             debug('fatal network error');
