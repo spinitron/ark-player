@@ -285,13 +285,13 @@
     function debug(...stuff) {
         if (enableDebug) {
             console.log(`${new Date().toLocaleTimeString()} `, ...stuff);
-            telemetry(stuff);
+            //telemetry(stuff);
         }
     }
 
     function handleHlsError(event, data) {
         if (data.fatal) {
-            telemetry(data);
+            //telemetry(data);
 
             switch (data.type) {
                 case Hls.ErrorTypes.NETWORK_ERROR:
