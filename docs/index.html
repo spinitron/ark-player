@@ -1,8 +1,3 @@
-<!-- Copyright Spinitron LLC -->
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
-   - License, v. 2.0. If a copy of the MPL was not distributed with this
-   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Ark Player widget demo</title>
 
-        <style>
+<!-- Copyright Spinitron LLC -->
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+       <style>
             html {
                 color: #222;
                 font-size: 1em;
@@ -111,17 +110,17 @@
             }
         </style>
 
-        <script src="https://cdn.jsdelivr.net/gh/spinitron/ark-player@main/dist/arkPlayer.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.js"></script>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spinitron/ark-player@main/dist/arkPlayer.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.css">
 
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     </head>
     <body>
         <div class="page_container">
             <h1>Ark Player widget</h1>
-ark
-            <p>This page is a demo of and instructions for the Spinitron Ark Player widget.</p>
+
+            <p>Demo page for Spinitron Ark Player widget, with instructions.</p>
 
             <p>
                 Github repo with the widget and this page:
@@ -194,16 +193,12 @@ ark
                 <div class="ark-player__control">
                     <button class="ark-player__play" aria-label="Play (k)" title="Play (k)">
                         <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z"
-                            />
+                            <path d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z" />
                         </svg>
                     </button>
                     <button class="ark-player__pause ark-player_hide" aria-label="Pause (k)" title="Play (k)">
                         <svg width="100%" height="100%" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M1664 192v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45zm-896 0v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45z"
-                            />
+                            <path d="M1664 192v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45zm-896 0v1408q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h512q26 0 45 19t19 45z" />
                         </svg>
                     </button>
                 </div>
@@ -211,35 +206,18 @@ ark
                 <div class="ark-player__volume-control">
                     <button class="ark-player__mute-button" aria-label="Mute (m)" title="Mute (m)">
                         <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                            <path
-                                class="ark-player__volume-speaker"
-                                d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"
-                            ></path>
-                            <path
-                                class="ark-player__volume-slash"
-                                d="M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z"
-                                style="display: none"
-                            ></path>
+                            <path class="ark-player__volume-speaker" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"></path>
+                            <path class="ark-player__volume-slash" d="M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z" style="display: none;"></path>
                         </svg>
                     </button>
-                    <div class="ark-player__volume-area">
-                        <input
-                            class="ark-player__volume-slider"
-                            type="range"
-                            min="0"
-                            max="100"
-                            value="100"
-                            role="slider"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                            aria-valuenow="100"
-                            aria-valuetext="100% volume"
-                        />
-                    </div>
+                    <div class="ark-player__volume-area"><input class="ark-player__volume-slider" type="range" min="0" max="100" value="100" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% volume"></div>
                 </div>
 
                 <div class="ark-player__picker">
-                    <div class="ark-player__date"><select name="date" class="select-css"></select></div>
+                    <div class="ark-player__date">
+                        <select name="date" class="select-css"></select>
+                    </div>
+
                     <div class="ark-player__time">
                         <select name="hours" class="select-css"></select>
                         <select name="minutes" class="select-css"></select>
@@ -263,29 +241,18 @@ ark
                 <li>JavaScript that initializes the player</li>
             </ol>
 
-            <p>
-                Your web site needs to be explicitly authorized to play Ark recordings from servers that Spinitron
-                manages. Ask Spinitron to do that for you.
-            </p>
-
-            <h3>Access to audio files</h3>
-
-            <p>
-                If you run the Ark Player on a server of your own and listeners will access audio archives managed by
-                Spinitron, ask Spinitron to authorize your origin (CORS) to access the audio files.
-            </p>
 
             <h2>1. Asset links</h2>
 
             <p>
                 The Ark Player requires a JavaScript file and a CSS file. You can put links to the files in the
                 spinitron/ark-player Github repo.
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L114-L115">This page</a> uses
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L113-L115">This page</a> uses
                 the following asset links that you can also use.
             </p>
 
-            <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.js"&gt;&lt;/script&gt;
-   &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ark-player@2/dist/arkPlayer.css"&gt;</code></pre>
+            <pre><code>&lt;script src="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.css"&gt;</code></pre>
 
             <p>
                 Alternatively you can copy the files from the <code>dist</code> directory of this repo into your web
@@ -305,7 +272,7 @@ ark
 
             <p>
                 The markup is a chunk of HTML for the Ark Player's user interface. Copy it from the
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L129-L189"
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L191-L232"
                     >source of this page</a
                 >. The part to copy is indicated in HTML comments.
             </p>
@@ -394,9 +361,7 @@ ark
 
             <p>
                 View the
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L331-L344"
-                    >source of this page</a
-                >
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L383-L406">source of this page</a>
                 to see an example.
             </p>
 
@@ -418,6 +383,7 @@ ark
             <script>
                 // todo initialize widget with data attributes on the #ark-player element, then the script loading can be non-blocking (async)
                 window.ark2Player(document.getElementById('ark-player'), {
+                    hlsBaseUrl: 'https://ark3.spinitron.com/ark2',
                     stationName: stationName,
                     // display player controls and status in this zone. should normally be the station zone.
                     // NOTE some older browsers don't support it in which case the player uses the client's zone
