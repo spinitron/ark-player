@@ -232,6 +232,24 @@
             </div>
             <!-- END OF WIDGET MARKUP -->
 
+            <div><br><h4 class="available-audio-heading" style="display:none">Available audio in this archive</h4></div>
+            <div class="ark-audio-availability"></div>
+            <script>
+                (() => {
+                    const searchParams = new URLSearchParams(window.location.search);
+                    const stationName = searchParams.get('station');
+                    if (stationName.match(/^[a-zA-Z][a-zA-Z0-9-]+[a-zA-Z0-9]$/)) {
+                        var availAjaxRequest = new XMLHttpRequest();
+                        availAjaxRequest.addEventListener("load", (event) => {
+                            document.querySelector('.ark-audio-availability').innerHTML = availAjaxRequest.responseText;
+                            document.querySelector('.available-audio-heading').style = 'display:initial;margin: 1.5em 0 0;';
+                        });
+                        availAjaxRequest.open("GET", `https://ark3.spinitron.com/cgi/avail-frag/?station=${stationName}`);
+                        availAjaxRequest.send();
+                    }
+                })();
+            </script>
+
             <p>The Ark Player widget has these parts that you should integrate into your web pages separately.</p>
 
             <ol>
@@ -304,7 +322,7 @@
                 This makes a block on the page and if the user clicks or touches it then the Ark Player starts playing
                 that archive beginning at 18:00:00 UTC on Oct 20th 2020. (It doesn't need to be a
                 <code>&lt;div&gt;</code>. Most visible elements should do.) Here are three examples with
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L313-L342"
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L331-L360"
                     >source code here</a>.
             </p>
 
@@ -360,7 +378,7 @@
 
             <p>
                 View the
-                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L382-L405">source of this page</a>
+                <a href="https://github.com/spinitron/ark-player/blob/main/docs/index.html#L402-L422">source of this page</a>
                 to see an example.
             </p>
 
