@@ -168,7 +168,7 @@
         if (Hls.isSupported()) {
             debug("Using Hls.js");
             if (myhls === undefined) {
-                myhls = new Hls();
+                myhls = new Hls({debug: enableDebug});
             }
             myhls.attachMedia(theMediaElement);
             myhls.on(Hls.Events.MEDIA_ATTACHED, function () {
@@ -235,7 +235,8 @@
         startArk(element.dataset.arkStart);
     });
     document.addEventListener('keydown', (e) => {
-        if (e.isComposing || e.keyCode === 229 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
+        if ((document.activeElement && document.activeElement.name && document.activeElement.name === 'message')
+            || e.isComposing || e.keyCode === 229 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
             return;
         }
         if (e.key === 'k') {
