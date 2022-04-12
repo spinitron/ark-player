@@ -87,8 +87,17 @@
 .ark-player__picker .ark-player__date {
   padding: 0.3em 0.4em 0 0;
 }
+.ark-player__picker .ark-player__date .select-css[name=date] {
+  width: 5em;
+}
 .ark-player__picker .ark-player__time {
   padding: 0.3em 0 0 0.4em;
+}
+.ark-player__picker .ark-player__time .select-css[name=hours] {
+  width: 3.5em;
+}
+.ark-player__picker .ark-player__time .select-css[name=minutes] {
+  width: 2.5em;
 }
 .ark-player__picker .select-css {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
