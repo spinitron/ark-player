@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
- window.ark2Player = function (container, options) {
+window.ark2Player = function (container, options) {
     const {
         stationName,
         timeZone,
@@ -262,8 +262,11 @@
             const timestring = arkTime
                 .toLocaleDateString(...localeStuff)
                 .replace(/(^\d\d?\/\d\d?\/)\d\d(\d\d)/, '$1$2');
-            playerStatus.querySelector('.ark-player__date').innerHTML = timestring;
-            playerStatus.querySelector('.ark-player__time').innerHTML = arkTime.toLocaleTimeString(...localeStuff);
+            // Use try in case the elements no longer exist. R2908
+            try {
+                playerStatus.querySelector('.ark-player__date').innerHTML = timestring;
+                playerStatus.querySelector('.ark-player__time').innerHTML = arkTime.toLocaleTimeString(...localeStuff);
+            } catch {}
             playerStatus.classList.toggle('waiting', false);
         }
     }
