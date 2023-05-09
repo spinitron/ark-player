@@ -2647,9 +2647,20 @@
     function updateTime() {
       if (arkStartTime) {
         var arkTime = new Date(arkStartTime + Math.round(1000 * theMediaElement.currentTime));
-        var timestring = arkTime.toLocaleDateString.apply(arkTime, _toConsumableArray(localeStuff)).replace(/(^\d\d?\/\d\d?\/)\d\d(\d\d)/, '$1$2');
-        playerStatus.querySelector('.ark-player__date').innerHTML = timestring;
-        playerStatus.querySelector('.ark-player__time').innerHTML = arkTime.toLocaleTimeString.apply(arkTime, _toConsumableArray(localeStuff));
+        var timestring = arkTime.toLocaleDateString.apply(arkTime, _toConsumableArray(localeStuff)).replace(/(^\d\d?\/\d\d?\/)\d\d(\d\d)/, '$1$2'); // Test the player elements still exist. R2908
+
+        var playerDate = playerStatus.querySelector('.ark-player__date');
+
+        if (playerDate) {
+          playerDate.innerHTML = timestring;
+        }
+
+        var playerTime = playerStatus.querySelector('.ark-player__time');
+
+        if (playerTime) {
+          playerTime.innerHTML = arkTime.toLocaleTimeString.apply(arkTime, _toConsumableArray(localeStuff));
+        }
+
         playerStatus.classList.toggle('waiting', false);
       }
     }
@@ -2672,8 +2683,8 @@
         //telemetry(data);
         switch (data.type) {
           case Hls.ErrorTypes.NETWORK_ERROR:
-            debug('fatal network error');
-            myhls.startLoad();
+            debug('fatal network error'); //myhls.startLoad();
+
             break;
 
           case Hls.ErrorTypes.MEDIA_ERROR:

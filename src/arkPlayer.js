@@ -304,7 +304,8 @@ window.ark2Player = function (container, options) {
             switch (data.type) {
                 case Hls.ErrorTypes.NETWORK_ERROR:
                     debug('fatal network error');
-                    myhls.startLoad();
+                    // don't call startLoad https://github.com/video-dev/hls.js/issues/5476#issuecomment-1540252422
+                    //myhls.startLoad();
                     break;
                 case Hls.ErrorTypes.MEDIA_ERROR:
                     debug('fatal media error');
