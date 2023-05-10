@@ -2400,6 +2400,7 @@
       hours: {}
     };
     var arkStartTime = null;
+    var userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t2 video-dev/hls.js@' + Hls.version;
     debug('ark player init: ', options); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
     // means use client's time zone instead of the station's.
 
@@ -2547,7 +2548,16 @@
 
         if (myhls === undefined) {
           myhls = new Hls({
-            debug: enableDebug
+            debug: enableDebug,
+            xhrSetup: function xhrSetup(xhr, url) {
+              xhr.setRequestHeader('User-Agent', userAgent);
+            },
+            fetchSetup: function fetchSetup(context, initParams) {
+              initParams.headers = new Headers({
+                'User-Agent': userAgent
+              });
+              return new Request(context.url, initParams);
+            }
           });
         }
 
@@ -2683,7 +2693,8 @@
         //telemetry(data);
         switch (data.type) {
           case Hls.ErrorTypes.NETWORK_ERROR:
-            debug('fatal network error'); //myhls.startLoad();
+            debug('fatal network error'); // don't call startLoad https://github.com/video-dev/hls.js/issues/5476#issuecomment-1540252422
+            //myhls.startLoad();
 
             break;
 

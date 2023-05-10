@@ -21,6 +21,7 @@ window.ark2Player = function (container, options) {
         `${new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, '')}0000Z`;
     const pickerOpts = { dates: [], hours: {} };
     var arkStartTime = null;
+    const userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t2 video-dev/hls.js@' + Hls.version;
 
     debug('ark player init: ', options);
 
@@ -168,7 +169,16 @@ window.ark2Player = function (container, options) {
         if (Hls.isSupported()) {
             debug("Using Hls.js");
             if (myhls === undefined) {
-                myhls = new Hls({debug: enableDebug});
+                myhls = new Hls({
+                    debug: enableDebug,
+                    xhrSetup: function (xhr, url) {
+                        xhr.setRequestHeader('User-Agent', userAgent);
+                    },
+                    fetchSetup: function (context, initParams) {
+                        initParams.headers = new Headers({'User-Agent': userAgent});
+                        return new Request(context.url, initParams);
+                    },
+                });
             }
             myhls.attachMedia(theMediaElement);
             myhls.on(Hls.Events.MEDIA_ATTACHED, function () {
