@@ -2693,14 +2693,15 @@
         //telemetry(data);
         switch (data.type) {
           case Hls.ErrorTypes.NETWORK_ERROR:
-            debug('fatal network error'); // don't call startLoad https://github.com/video-dev/hls.js/issues/5476#issuecomment-1540252422
+            debug('fatal network error'); // don't call startLoad https://github.com/video-dev/hls.js/issues/5476
             //myhls.startLoad();
 
             break;
 
           case Hls.ErrorTypes.MEDIA_ERROR:
-            debug('fatal media error');
-            myhls.recoverMediaError();
+            debug('fatal media error'); // don't call recoverMediaError https://github.com/video-dev/hls.js/issues/5476
+            //myhls.recoverMediaError();
+
             break;
 
           default:
