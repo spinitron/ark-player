@@ -2400,7 +2400,7 @@
       hours: {}
     };
     var arkStartTime = null;
-    var userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t4 video-dev/hls.js@' + Hls.version;
+    var userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t5 video-dev/hls.js@' + Hls.version;
     debug('ark player init: ', options); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
     // means use client's time zone instead of the station's.
 
@@ -2692,18 +2692,16 @@
       if (data.fatal) {
         //telemetry(data);
         switch (data.type) {
-          case Hls.ErrorTypes.NETWORK_ERROR:
-            debug('fatal network error'); // don't call startLoad https://github.com/video-dev/hls.js/issues/5476
-            //myhls.startLoad();
-
-            break;
-
-          case Hls.ErrorTypes.MEDIA_ERROR:
-            debug('fatal media error'); // don't call recoverMediaError https://github.com/video-dev/hls.js/issues/5476
-            //myhls.recoverMediaError();
-
-            break;
-
+          // case Hls.ErrorTypes.NETWORK_ERROR:
+          //     debug('fatal network error');
+          //     // don't call startLoad https://github.com/video-dev/hls.js/issues/5476
+          //     myhls.startLoad();
+          //     break;
+          // case Hls.ErrorTypes.MEDIA_ERROR:
+          //     debug('fatal media error');
+          //     // don't call recoverMediaError https://github.com/video-dev/hls.js/issues/5476
+          //     myhls.recoverMediaError();
+          //     break;
           default:
             debug('unrecoverable fatal error, des');
             myhls.destroy();

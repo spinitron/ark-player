@@ -21,7 +21,7 @@ window.ark2Player = function (container, options) {
         `${new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, '')}0000Z`;
     const pickerOpts = { dates: [], hours: {} };
     var arkStartTime = null;
-    const userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t4 video-dev/hls.js@' + Hls.version;
+    const userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t5 video-dev/hls.js@' + Hls.version;
 
     debug('ark player init: ', options);
 
@@ -312,16 +312,16 @@ window.ark2Player = function (container, options) {
             //telemetry(data);
 
             switch (data.type) {
-                case Hls.ErrorTypes.NETWORK_ERROR:
-                    debug('fatal network error');
-                    // don't call startLoad https://github.com/video-dev/hls.js/issues/5476
-                    //myhls.startLoad();
-                    break;
-                case Hls.ErrorTypes.MEDIA_ERROR:
-                    debug('fatal media error');
-                    // don't call recoverMediaError https://github.com/video-dev/hls.js/issues/5476
-                    //myhls.recoverMediaError();
-                    break;
+                // case Hls.ErrorTypes.NETWORK_ERROR:
+                //     debug('fatal network error');
+                //     // don't call startLoad https://github.com/video-dev/hls.js/issues/5476
+                //     myhls.startLoad();
+                //     break;
+                // case Hls.ErrorTypes.MEDIA_ERROR:
+                //     debug('fatal media error');
+                //     // don't call recoverMediaError https://github.com/video-dev/hls.js/issues/5476
+                //     myhls.recoverMediaError();
+                //     break;
                 default:
                     debug('unrecoverable fatal error, des');
                     myhls.destroy();
