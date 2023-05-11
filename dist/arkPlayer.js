@@ -2400,7 +2400,7 @@
       hours: {}
     };
     var arkStartTime = null;
-    var userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t5 video-dev/hls.js@' + Hls.version;
+    var userAgent = window.navigator.userAgent + ' spinitron/ark-player@v4.2.0/fix-hls.js#5476/t6 video-dev/hls.js@' + Hls.version;
     debug('ark player init: ', options); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
     // means use client's time zone instead of the station's.
 
@@ -2561,14 +2561,14 @@
           });
         }
 
+        myhls.loadSource(playlistUrl);
         myhls.attachMedia(theMediaElement);
         myhls.on(Hls.Events.MEDIA_ATTACHED, function () {
-          myhls.loadSource(playlistUrl);
           pleaseReload = false;
-          myhls.on(Hls.Events.ERROR, handleHlsError);
-          myhls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-            pressPlay();
-          });
+        });
+        myhls.on(Hls.Events.ERROR, handleHlsError);
+        myhls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+          pressPlay();
         });
         document.querySelector('.ark-player__mode-hint').innerHTML = 'H';
       } else if (theMediaElement.canPlayType('application/vnd.apple.mpegurl')) {
@@ -2691,21 +2691,12 @@
     function handleHlsError(event, data) {
       if (data.fatal) {
         //telemetry(data);
-        switch (data.type) {
-          // case Hls.ErrorTypes.NETWORK_ERROR:
-          //     debug('fatal network error');
-          //     // don't call startLoad https://github.com/video-dev/hls.js/issues/5476
-          //     myhls.startLoad();
-          //     break;
-          // case Hls.ErrorTypes.MEDIA_ERROR:
-          //     debug('fatal media error');
-          //     // don't call recoverMediaError https://github.com/video-dev/hls.js/issues/5476
-          //     myhls.recoverMediaError();
-          //     break;
-          default:
-            debug('unrecoverable fatal error, des');
-            myhls.destroy();
-        }
+        // Follow instructions from Rob Walch https://github.com/video-dev/hls.js/issues/5476
+        // Fatal error means all hls.js attempts to recover have failed.
+        // Destroy the player ...
+        myhls.destroy(); // TODO
+        // ...and create a new instance with a startPosition matching video.currentTime
+        // or the end of the fragment that errored or last FRAG_CHANGED fragment.
       }
     }
     /**
