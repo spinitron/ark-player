@@ -112,7 +112,8 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.css">
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-        <script src="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/spinitron/ark-player@latest/dist/arkPlayer.js"></script> -->
+        <script src="/src/arkPlayer.js"></script>
 
 
     </head>
@@ -132,32 +133,53 @@
 
                 <select class="ark_player_demo select_station" id="station-select">
                     <option name="stations">-- Choose a station --</option>
+                    <option value="Humboldt-Hot-Air" data-timezone="America/Los_Angeles">Humboldt-Hot-Air</option>
                     <option value="KAFM" data-timezone="America/Denver">KAFM</option>
+                    <option value="KALX" data-timezone="America/Los_Angeles">KALX</option>
                     <option value="KAOS" data-timezone="America/Los_Angeles">KAOS</option>
+                    <option value="KBBF" data-timezone="America/Los_Angeles">KBBF</option>
                     <option value="KBCS" data-timezone="America/Los_Angeles">KBCS</option>
                     <option value="KCSB" data-timezone="America/Los_Angeles">KCSB</option>
                     <option value="KCSM" data-timezone="America/Los_Angeles">KCSM</option>
                     <option value="KDUR" data-timezone="America/Denver">KDUR</option>
+                    <option value="KFAI" data-timezone="America/Chicago">KFAI</option>
                     <option value="KGLP" data-timezone="America/Denver">KGLP</option>
+                    <option value="KGLT" data-timezone="America/Denver">KGLT</option>
+                    <option value="KHNS" data-timezone="America/Anchorage">KHNS</option>
                     <option value="KKUP" data-timezone="America/Los_Angeles">KKUP</option>
+                    <option value="KMSU" data-timezone="America/Chicago">KMSU</option>
                     <option value="KMUZ" data-timezone="America/Los_Angeles">KMUZ</option>
                     <option value="KNON" data-timezone="America/Chicago">KNON</option>
+                    <option value="KNON-NOW" data-timezone="America/Chicago">KNON-NOW</option>
                     <option value="KNSJ" data-timezone="America/Los_Angeles">KNSJ</option>
                     <option value="KOPN" data-timezone="America/Chicago">KOPN</option>
                     <option value="KOTO" data-timezone="America/Denver">KOTO</option>
                     <option value="KPOO" data-timezone="America/Los_Angeles">KPOO</option>
                     <option value="KPTZ" data-timezone="America/Los_Angeles">KPTZ</option>
+                    <option value="KQNY" data-timezone="America/Los_Angeles">KQNY</option>
+                    <option value="KRFF" data-timezone="America/Chicago">KRFF</option>
+                    <option value="KRVM" data-timezone="America/Los_Angeles">KRVM</option>
+                    <option value="KRVS" data-timezone="America/Chicago">KRVS</option>
+                    <option value="KSDT" data-timezone="America/Los_Angeles">KSDT</option>
+                    <option value="KSER" data-timezone="America/Los_Angeles">KSER</option>
                     <option value="KSJD" data-timezone="America/Denver">KSJD</option>
+                    <option value="KSKQ" data-timezone="America/Los_Angeles">KSKQ</option>
                     <option value="KSPC" data-timezone="America/Los_Angeles">KSPC</option>
                     <option value="KSYM" data-timezone="America/Chicago">KSYM</option>
+                    <option value="KTAL" data-timezone="America/Denver">KTAL</option>
                     <option value="KTNA" data-timezone="America/Anchorage">KTNA</option>
-                    <option value="KURU" data-timezone="America/Denver">KURU</option>
+                    <option value="KUPR" data-timezone="America/Denver">KUPR</option>
                     <option value="KVCU" data-timezone="America/Denver">KVCU</option>
                     <option value="KVRF" data-timezone="America/Anchorage">KVRF</option>
+                    <option value="KWSO" data-timezone="America/Los_Angeles">KWSO</option>
                     <option value="KXCI" data-timezone="America/Phoenix">KXCI</option>
+                    <option value="KXLU" data-timezone="America/Los_Angeles">KXLU</option>
                     <option value="KZFR" data-timezone="America/Los_Angeles">KZFR</option>
                     <option value="KZMU" data-timezone="America/Denver">KZMU</option>
                     <option value="KZSC" data-timezone="America/Los_Angeles">KZSC</option>
+                    <option value="Maine-Public" data-timezone="America/New_York">Maine-Public</option>
+                    <option value="WBCR-LP" data-timezone="America/New_York">WBCR-LP</option>
+                    <option value="WBOR" data-timezone="America/New_York">WBOR</option>
                     <option value="WCOM" data-timezone="America/New_York">WCOM</option>
                     <option value="WCUW" data-timezone="America/New_York">WCUW</option>
                     <option value="WDNA" data-timezone="America/New_York">WDNA</option>
@@ -172,15 +194,21 @@
                     <option value="WHCP" data-timezone="America/New_York">WHCP</option>
                     <option value="WMMT" data-timezone="America/New_York">WMMT</option>
                     <option value="WMRW" data-timezone="America/New_York">WMRW</option>
+                    <option value="WMUH" data-timezone="America/New_York">WMUH</option>
                     <option value="WNMC" data-timezone="America/New_York">WNMC</option>
                     <option value="WOWD" data-timezone="America/New_York">WOWD</option>
+                    <option value="WPRK" data-timezone="America/New_York">WPRK</option>
                     <option value="WQSV" data-timezone="America/New_York">WQSV</option>
+                    <option value="WRCT" data-timezone="America/New_York">WRCT</option>
                     <option value="WRFI" data-timezone="America/New_York">WRFI</option>
                     <option value="WSCA" data-timezone="America/New_York">WSCA</option>
                     <option value="WTIP" data-timezone="America/Chicago">WTIP</option>
+                    <option value="WTUL" data-timezone="America/Chicago">WTUL</option>
                     <option value="WUML" data-timezone="America/New_York">WUML</option>
                     <option value="WVEW" data-timezone="America/New_York">WVEW</option>
+                    <option value="WVMO" data-timezone="America/Chicago">WVMO</option>
                     <option value="WXNA" data-timezone="America/Chicago">WXNA</option>
+                    <option value="WXOJ" data-timezone="America/New_York">WXOJ</option>
                     <option value="WXOX" data-timezone="America/New_York">WXOX</option>
                     <option value="WXPR" data-timezone="America/Chicago">WXPR</option>
                     <option value="WZBC" data-timezone="America/New_York">WZBC</option>
