@@ -1,4 +1,9 @@
-2.4.1 2023 Jun 05
+4.3.2 2023 Jun 05
+
+Maybe try to fix version confusion.
+
+
+4.2.1 2023 Jun 05
 
 Fixed looping bugs with hls.js v1.4.1 https://github.com/video-dev/hls.js/issues/5476
 by removing recovery code, instead destroy the Hls player on fatal error.

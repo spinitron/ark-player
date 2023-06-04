@@ -2400,7 +2400,7 @@
       hours: {}
     };
     var arkStartTime = null;
-    var userAgent = window.navigator.userAgent + ' ark-player@v4.3.1 hls.js@' + Hls.version;
+    var userAgent = window.navigator.userAgent + ' ark-player@v4.3.2 hls.js@' + Hls.version;
     debug('ark player init: ', options); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
     // means use client's time zone instead of the station's.
 
