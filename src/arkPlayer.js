@@ -21,7 +21,7 @@ window.ark2Player = function (container, options) {
         `${new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, '')}0000Z`;
     const pickerOpts = { dates: [], hours: {} };
     var arkStartTime = null;
-    const userAgent = window.navigator.userAgent + ' ark-player@v4.2.1 hls.js@' + Hls.version;
+    const userAgent = window.navigator.userAgent + ' ark-player@v4.3.1 hls.js@' + Hls.version;
 
     debug('ark player init: ', options);
 
