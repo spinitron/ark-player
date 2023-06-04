@@ -1,0 +1,11 @@
+2.4.1 2023 Jun 05
+
+Fixed looping bugs with hls.js v1.4.1 https://github.com/video-dev/hls.js/issues/5476
+by removing recovery code, instead destroy the Hls player on fatal error.
+
+Add version strings for ark-player and hls.js to user agent.
+
+Fix client error (R2908) in case player UI doesn't exist.
+
+Update station options in demo page dropdown.
+
