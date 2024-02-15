@@ -8,8 +8,8 @@ window.ark2Player = function (container, options) {
         stationName,
         timeZone,
         enableDebug = false,
-        hlsBaseUrl = 'https://ark2.spinitron.com/ark2',
-        errorReportUrl = 'https://ark2.spinitron.com/errorlog/',
+        hlsBaseUrl = 'https://ark3.spinitron.com/ark2',
+        errorReportUrl = 'https://ark3.spinitron.com/errorlog/',
     } = options;
 
     /** @type {HTMLMediaElement} */
