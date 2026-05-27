@@ -2387,7 +2387,7 @@
         _options$enableDebug = options.enableDebug,
         enableDebug = _options$enableDebug === void 0 ? false : _options$enableDebug,
         _options$hlsBaseUrl = options.hlsBaseUrl,
-        hlsBaseUrl = _options$hlsBaseUrl === void 0 ? 'https://ark2.spinitron.com/ark2' : _options$hlsBaseUrl;
+        hlsBaseUrl = _options$hlsBaseUrl === void 0 ? 'https://ark3.spinitron.com/ark2' : _options$hlsBaseUrl;
         options.errorReportUrl;
     /** @type {HTMLMediaElement} */
 
@@ -2400,7 +2400,7 @@
       hours: {}
     };
     var arkStartTime = null;
-    var userAgent = window.navigator.userAgent + ' ark-player@v4.3.2 hls.js@' + Hls.version;
+    var userAgent = window.navigator.userAgent + ' ark-player@v4.3.3 hls.js@' + Hls.version;
     debug('ark player init: ', options); // Uee localeStuff as argument to Date.toLocaleString() etc. If browser can't do timezones, empty array
     // means use client's time zone instead of the station's.
 
@@ -2408,9 +2408,9 @@
       var β = '?';
 
       try {
-        β = new Date().toLocaleString(['en-US', {
+        β = new Date().toLocaleString('en-US', {
           timeZone: timeZone
-        }]);
+        });
       } catch (ignore) {
         return [];
       }

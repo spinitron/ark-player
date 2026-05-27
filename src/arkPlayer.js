@@ -21,7 +21,7 @@ window.ark2Player = function (container, options) {
         `${new Date(new Date().getTime() - 7200000).toISOString().substring(0, 13).replace(/-/g, '')}0000Z`;
     const pickerOpts = { dates: [], hours: {} };
     var arkStartTime = null;
-    const userAgent = window.navigator.userAgent + ' ark-player@v4.3.2 hls.js@' + Hls.version;
+    const userAgent = window.navigator.userAgent + ' ark-player@v4.3.3 hls.js@' + Hls.version;
 
     debug('ark player init: ', options);
 
@@ -30,7 +30,7 @@ window.ark2Player = function (container, options) {
     const localeStuff = (() => {
         let β = '?';
         try {
-            β = new Date().toLocaleString(['en-US', { timeZone }]);
+            β = new Date().toLocaleString('en-US', { timeZone });
         } catch (ignore) {
             return [];
         }
