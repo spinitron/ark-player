@@ -1,0 +1,9 @@
+- choose a new version number N.N.N
+- update `const userAgent` in arkPlayer.js
+- update `version` in package.json
+- update changes.txt
+- git commit
+- git tag with vN.N.N (note the "v" prefix here)
+- git push
+- `npm login`
+- `npm publish`
